@@ -1,9 +1,11 @@
+const Board = require("./board.js");
 const AlienShip = require("./alien_ship.js");
 const PlayerShip = require("./player_ship.js");
 
 class Game {
   constructor(lives = 3) {
     this.lives = lives;
+    this.board = new Board();
     this.initializeAlienShips();
     this.createPlayerShip();
   }
