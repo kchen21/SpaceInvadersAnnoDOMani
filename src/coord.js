@@ -12,7 +12,8 @@ class Coord {
 
   shift(direction) {
     const deltas = this.directions(direction);
-    return new Coord(this.x + deltas[0], this.y + deltas[1]);
+    this.x += deltas[0];
+    this.y += deltas[1];
   }
 
   isEqual(coord2) {
