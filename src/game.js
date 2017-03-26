@@ -74,6 +74,7 @@ class Game {
     } else if (ship instanceof AlienShip) {
       const alienShipIndex = this.alienShips.indexOf(ship);
       this.alienShips[alienShipIndex] = null;
+      this.alienShips[alienShipIndex + 6].shooting = true;
       ship.body.forEach((part) => {
         game.updatedBoard(part, null);
       });
