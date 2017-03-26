@@ -45,7 +45,7 @@ class Game {
 
   createPlayerShip() {
     if (this.lives > 0) {
-      return new PlayerShip([27, 13]);
+      return new PlayerShip([33, 13]);
     }
   }
 }
