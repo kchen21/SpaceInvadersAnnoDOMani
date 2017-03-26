@@ -17,6 +17,10 @@ class Game {
     const alienShipNoses4 = [[8,2], [8,6], [8,10], [8,14], [8,18], [8,22]];
     const alienShipNoses5 = [[5,3], [5,7], [5,11], [5,15], [5,19], [5,23]];
 
+    this.resetAlienShips(alienShipNoses1, alienShipNoses2, alienShipNoses3, alienShipNoses4, alienShipNoses5);
+  }
+
+  resetAlienShips(alienShipNoses1, alienShipNoses2, alienShipNoses3, alienShipNoses4, alienShipNoses5) {
     this.aliensShips = [];
 
     alienShipNoses1.forEach((nose) => {
@@ -50,6 +54,8 @@ class Game {
       return new PlayerShip([33,13]);
     }
   }
+
+
 }
 
 modules.export = Game;
