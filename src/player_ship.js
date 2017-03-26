@@ -5,3 +5,5 @@ class PlayerShip extends Ship {
 
   }
 }
+
+modules.export = PlayerShip;
