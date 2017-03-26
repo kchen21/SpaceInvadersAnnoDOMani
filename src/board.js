@@ -1,3 +1,5 @@
+const Coord = require("./coord.js");
+
 class Board {
   constructor(width = 27, height = 36) {
     this.width = width;
@@ -15,6 +17,10 @@ class Board {
       }
       this.grid.push(row);
     }
+  }
+
+  updateGrid(coord, val) {
+    this.grid[coord.x][coord.y] = val;
   }
 }
 

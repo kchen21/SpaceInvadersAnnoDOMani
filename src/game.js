@@ -25,28 +25,45 @@ class Game {
   resetAlienShips(alienShipNoses1, alienShipNoses2, alienShipNoses3, alienShipNoses4, alienShipNoses5) {
     this.aliensShips = [];
 
+    const game = this;
+
     alienShipNoses1.forEach((nose) => {
       let ship = new AlienShip(nose, "white");
+      ship.body.forEach((part) => {
+        game.updateBoard(part, "white-alien");
+      });
       this.alienShips.push(ship);
     });
 
     alienShipNoses2.forEach((nose) => {
       let ship = new AlienShip(nose, "yellow");
+      ship.body.forEach((part) => {
+        game.updateBoard(part, "yellow-alien");
+      });
       this.alienShips.push(ship);
     });
 
     alienShipNoses3.forEach((nose) => {
       let ship = new AlienShip(nose, "green");
+      ship.body.forEach((part) => {
+        game.updateBoard(part, "green-alien");
+      });
       this.alienShips.push(ship);
     });
 
     alienShipNoses4.forEach((nose) => {
       let ship = new AlienShip(nose, "blue");
+      ship.body.forEach((part) => {
+        game.updateBoard(part, "blue-alien");
+      });
       this.alienShips.push(ship);
     });
 
     alienShipNoses5.forEach((nose) => {
       let ship = new AlienShip(nose, "purple");
+      ship.body.forEach((part) => {
+        game.updateBoard(part, "purple-alien");
+      });
       this.alienShips.push(ship);
     });
   }
@@ -55,6 +72,10 @@ class Game {
     if (this.lives > 0) {
       this.playerShip = new PlayerShip([33,13]);
     }
+  }
+
+  updateBoard(coord, val) {
+    this.board.updateGrid(coord, val);
   }
 }
 
