@@ -22,47 +22,40 @@ class Game {
     const alienShipNoses4 = [[8,2], [8,6], [8,10], [8,14], [8,18], [8,22]];
     const alienShipNoses5 = [[5,3], [5,7], [5,11], [5,15], [5,19], [5,23]];
 
-    const game = this;
-
     alienShipNoses1.forEach((nose) => {
       let ship = new AlienShip(nose, "white");
       ship.shooting = true;
-      ship.body.forEach((part) => {
-        game.updateBoard(part, "white-alien");
-      });
       this.alienShips.push(ship);
     });
 
     alienShipNoses2.forEach((nose) => {
       let ship = new AlienShip(nose, "yellow");
-      ship.body.forEach((part) => {
-        game.updateBoard(part, "yellow-alien");
-      });
       this.alienShips.push(ship);
     });
 
     alienShipNoses3.forEach((nose) => {
       let ship = new AlienShip(nose, "green");
-      ship.body.forEach((part) => {
-        game.updateBoard(part, "green-alien");
-      });
       this.alienShips.push(ship);
     });
 
     alienShipNoses4.forEach((nose) => {
       let ship = new AlienShip(nose, "blue");
-      ship.body.forEach((part) => {
-        game.updateBoard(part, "blue-alien");
-      });
       this.alienShips.push(ship);
     });
 
     alienShipNoses5.forEach((nose) => {
       let ship = new AlienShip(nose, "purple");
-      ship.body.forEach((part) => {
-        game.updateBoard(part, "purple-alien");
-      });
       this.alienShips.push(ship);
+    });
+  }
+
+  markAlienShipsOnBoard() {
+    const game = this;
+
+    this.alienShips.forEach((ship) => {
+      ship.body.forEach((part) => {
+        game.updateBoard(part, ship.color);
+      });
     });
   }
 
@@ -91,7 +84,7 @@ class Game {
     this.board.updateGrid(coord, val);
   }
 
-  generateMissile({loc, origin}) {
+  createMissile({loc, origin}) {
     this.missileId += 1;
     const missile = new Missile(loc[0], loc[1], this.missileId, origin);
     this.missiles[this.missileId] = missile;
@@ -101,7 +94,7 @@ class Game {
     delete this.missiles[id];
   }
 
-  updateBoardMissiles() {
+  markMissilesOnBoard() {
     for (id in this.missiles) {
       let missile = this.missiles[id];
       updateBoard(missile, "missile");
