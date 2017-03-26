@@ -59,6 +59,29 @@ class Game {
     });
   }
 
+  moveAlienShipsLR() {
+    this.alienShips.forEach((ship, idx, arr) => {
+      let leftmostShipIndex = (Math.floor(idx / 6)) * 6;
+      let leftmostShip = arr[leftmostShipIndex];
+      let rightmostShipIndex = (((Math.floor(idx / 6)) + 1) * 6) - 1;
+      let rightmostShip = arr[rightmostShipIndex];
+
+      if (rightmostShip.body[3].x === 26) {
+        ship.direction = "left";
+      } else if (leftmostShip.body[2].x === 0) {
+        ship.direction = "right";
+      }
+
+      ship.move(ship.direction);
+    });
+  }
+
+  moveAlienShipsDown() {
+    this.alienShips.forEach((ship) => {
+      ship.move("down");
+    });
+  }
+
   destroyShip(ship) {
     if (ship instanceof PlayerShip) {
       ship.body.forEach((part) => {
@@ -66,7 +89,8 @@ class Game {
       });
     } else if (ship instanceof AlienShip) {
       const alienShipIndex = this.alienShips.indexOf(ship);
-      this.alienShips[alienShipIndex] = null;
+      this.alienShips[alienShipIndex].color = "black";
+      this.alienShips[alienShipIndex].shooting = false;
       this.alienShips[alienShipIndex + 6].shooting = true;
       ship.body.forEach((part) => {
         game.updatedBoard(part, null);
