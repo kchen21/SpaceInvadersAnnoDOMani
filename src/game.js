@@ -7,20 +7,20 @@ class Game {
   constructor(lives = 3) {
     this.lives = lives;
     this.board = new Board();
-    this.initializeAlienShips();
-    this.resetPlayerShip();
-    this.missiles = {};
+    this.aliensShips = [];
+    this.playerShip = null;
     this.missileId = 0;
+    this.missiles = {};
+    this.renderAlienShips();
+    this.resetPlayerShip();
   }
 
-  initializeAlienShips() {
+  renderAlienShips() {
     const alienShipNoses1 = [[17,3], [17,7], [17,11], [17,15], [17,19], [17,23]];
     const alienShipNoses2 = [[14,2], [14,6], [14,10], [14,14], [14,18], [14,22]];
     const alienShipNoses3 = [[11,1], [11,5], [11,9], [11,13], [11,17], [11,21]];
     const alienShipNoses4 = [[8,2], [8,6], [8,10], [8,14], [8,18], [8,22]];
     const alienShipNoses5 = [[5,3], [5,7], [5,11], [5,15], [5,19], [5,23]];
-
-    this.aliensShips = [];
 
     const game = this;
 
