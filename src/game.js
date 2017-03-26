@@ -7,7 +7,7 @@ class Game {
     this.lives = lives;
     this.board = new Board();
     this.initializeAlienShips();
-    this.createPlayerShip();
+    this.resetPlayerShip();
   }
 
   initializeAlienShips() {
@@ -49,13 +49,11 @@ class Game {
     });
   }
 
-  createPlayerShip() {
+  resetPlayerShip() {
     if (this.lives > 0) {
-      return new PlayerShip([33,13]);
+      this.playerShip = new PlayerShip([33,13]);
     }
   }
-
-
 }
 
 modules.export = Game;
