@@ -3,8 +3,8 @@ const Coord = require("./Coord.js");
 
 class AlienShip extends Ship {
   constructor(nose, color) {
+    super(nose);
     this.color = color;
-    this.nose = nose;
     this.initializeBody(this.nose);
   }
 
