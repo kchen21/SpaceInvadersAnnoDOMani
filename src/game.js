@@ -1,3 +1,6 @@
+const AlienShip = require("./alien_ship.js");
+const PlayerShip = require("./player_ship.js");
+
 class Game {
   constructor(lives = 5) {
     this.lives = lives;
@@ -13,11 +16,36 @@ class Game {
     const alienShipNoses5 = [];
 
     this.aliens = [];
+
+    alienShipNoses1.forEach((nose) => {
+      let ship = new AlienShip(nose, "white");
+      this.aliens.push(ship);
+    });
+
+    alienShipNoses2.forEach((nose) => {
+      let ship = new AlienShip(nose, "yellow");
+      this.aliens.push(ship);
+    });
+
+    alienShipNoses3.forEach((nose) => {
+      let ship = new AlienShip(nose, "green");
+      this.aliens.push(ship);
+    });
+
+    alienShipNoses4.forEach((nose) => {
+      let ship = new AlienShip(nose, "blue");
+      this.aliens.push(ship);
+    });
+
+    alienShipNoses5.forEach((nose) => {
+      let ship = new AlienShip(nose, "purple");
+      this.aliens.push(ship);
+    });
   }
 
   createPlayerShip() {
     if (this.lives > 0) {
-      new Player([27, 13]);
+      new PlayerShip([27, 13]);
     }
   }
 }
