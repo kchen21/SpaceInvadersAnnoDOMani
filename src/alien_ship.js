@@ -14,7 +14,7 @@ class AlienShip extends Ship {
     this.body.push(new Coord(nose[0], nose[1]));
     this.body.push(new Coord(nose[0] - 1, nose[1]));
     this.body.push(new Coord(nose[0] - 1, nose[1] - 1));
-    this.body.push(new Coord(nose[0] - 1, nose[1]) + 1);
+    this.body.push(new Coord(nose[0] - 1, nose[1] + 1));
   }
 }
 
