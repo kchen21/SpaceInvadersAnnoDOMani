@@ -5,10 +5,10 @@ class PlayerShip extends Ship {
   constructor(nose) {
     super(nose);
     this.body = [];
-    this.initializeBody(this.nose);
+    this.renderBody(this.nose);
   }
 
-  initializeBody(nose) {
+  renderBody(nose) {
     this.body.push(new Coord(nose[0], nose[1]));
     this.body.push(new Coord(nose[0] + 1, nose[1]));
     this.body.push(new Coord(nose[0] + 1, nose[1] - 1));

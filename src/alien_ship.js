@@ -7,10 +7,10 @@ class AlienShip extends Ship {
     this.body = [];
     this.color = color;
     this.shooting = false;
-    this.initializeBody(this.nose);
+    this.renderBody(this.nose);
   }
 
-  initializeBody(nose) {
+  renderBody(nose) {
     this.body.push(new Coord(nose[0], nose[1]));
     this.body.push(new Coord(nose[0] - 1, nose[1]));
     this.body.push(new Coord(nose[0] - 1, nose[1] - 1));
