@@ -6,7 +6,7 @@ class AlienShip extends Ship {
     this.initializeBody(nose);
   }
 
-  initializeBody() {
+  initializeBody(nose) {
     this.body = [];
 
     this.body.push(new Coor(nose[0], nose[1]));
