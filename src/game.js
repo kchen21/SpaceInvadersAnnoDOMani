@@ -100,6 +100,13 @@ class Game {
   destroyMissile(id) {
     delete this.missiles[id];
   }
+
+  updateBoardMissiles() {
+    for (id in this.missiles) {
+      let missile = this.missiles[id];
+      updateBoard(missile, "missile");
+    }
+  }
 }
 
 modules.export = Game;
