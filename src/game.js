@@ -93,8 +93,12 @@ class Game {
 
   generateMissile({loc, origin}) {
     this.missileId += 1;
-    const missile = new Missile(loc[0], loc[1], origin);
+    const missile = new Missile(loc[0], loc[1], this.missileId, origin);
     this.missiles[this.missileId] = missile;
+  }
+
+  destroyMissile(id) {
+    delete this.missiles[id];
   }
 }
 
