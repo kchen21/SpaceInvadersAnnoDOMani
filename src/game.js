@@ -84,11 +84,16 @@ class Game {
 
   destroyShip(ship) {
     if (ship instanceof PlayerShip) {
+      this.lives -= 1;
+      this.playerShip = null;
       ship.body.forEach((part) => {
         game.updatedBoard(part, null);
       });
     } else if (ship instanceof AlienShip) {
       const alienShipIndex = this.alienShips.indexOf(ship);
+      // The ship will be hidden, but will continue to exist,
+      // because, to determine the direction in which a row's ships will move,
+      // we need the ships at each end.
       this.alienShips[alienShipIndex].color = "black";
       this.alienShips[alienShipIndex].shooting = false;
       this.alienShips[alienShipIndex + 6].shooting = true;
