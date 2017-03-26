@@ -8,6 +8,8 @@ class Game {
     this.board = new Board();
     this.initializeAlienShips();
     this.resetPlayerShip();
+    this.missiles = {};
+    this.missileId = 0;
   }
 
   initializeAlienShips() {

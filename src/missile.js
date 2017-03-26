@@ -1,7 +1,7 @@
 const Coord = require("./Coord.js");
 
 class Missile extends Coord {
-  constructor(x, y, id) {
+  constructor(x, y, key) {
     super(x, y);
     this.directions = {
       "up": [-1, 0],
