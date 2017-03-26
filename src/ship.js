@@ -9,7 +9,7 @@ class Ship {
   move(direction) {
     this.body.forEach((part) => {
       part.shift(direction);
-    })
+    });
   }
 }
 

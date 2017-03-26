@@ -5,6 +5,7 @@ class AlienShip extends Ship {
   constructor(nose, color) {
     super(nose);
     this.color = color;
+    this.shooting = false;
     this.initializeBody(this.nose);
   }
 

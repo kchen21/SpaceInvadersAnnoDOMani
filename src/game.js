@@ -20,16 +20,13 @@ class Game {
     const alienShipNoses4 = [[8,2], [8,6], [8,10], [8,14], [8,18], [8,22]];
     const alienShipNoses5 = [[5,3], [5,7], [5,11], [5,15], [5,19], [5,23]];
 
-    this.resetAlienShips(alienShipNoses1, alienShipNoses2, alienShipNoses3, alienShipNoses4, alienShipNoses5);
-  }
-
-  resetAlienShips(alienShipNoses1, alienShipNoses2, alienShipNoses3, alienShipNoses4, alienShipNoses5) {
     this.aliensShips = [];
 
     const game = this;
 
     alienShipNoses1.forEach((nose) => {
       let ship = new AlienShip(nose, "white");
+      ship.shooting = true;
       ship.body.forEach((part) => {
         game.updateBoard(part, "white-alien");
       });
@@ -67,6 +64,20 @@ class Game {
       });
       this.alienShips.push(ship);
     });
+  }
+
+  destroyShip(ship) {
+    if (ship instanceof PlayerShip) {
+      ship.body.forEach((part) => {
+        game.updatedBoard(part, null);
+      });
+    } else if (ship instanceof AlienShip) {
+      const alienShipIndex = this.alienShips.indexOf(ship);
+      this.alienShips[alienShipIndex] = null;
+      ship.body.forEach((part) => {
+        game.updatedBoard(part, null);
+      });
+    }
   }
 
   resetPlayerShip() {
