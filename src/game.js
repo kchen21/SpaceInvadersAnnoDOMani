@@ -79,7 +79,7 @@ class Game {
     this.board.updateGrid(coord, val);
   }
 
-  generateMissile(loc, origin) {
+  generateMissile({loc, origin}) {
     this.missileId += 1;
     const missile = new Missile(loc[0], loc[1], origin);
     this.missiles[this.missileId] = missile;
