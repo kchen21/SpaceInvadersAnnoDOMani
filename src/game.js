@@ -129,6 +129,16 @@ class Game {
       updateBoard(missile, "missile");
     }
   }
+
+  moveMissiles() {
+    this.missiles.forEach((missile) => {
+      if (missile.origin === "alien") {
+        missile.shift("down");
+      } else if (missile.origin) === "human") {
+        missile.shift("up");
+      }
+    });
+  }
 }
 
 modules.export = Game;
