@@ -2,7 +2,7 @@ const AlienShip = require("./alien_ship.js");
 const PlayerShip = require("./player_ship.js");
 
 class Game {
-  constructor(lives = 5) {
+  constructor(lives = 4) {
     this.lives = lives;
     this.initializeAlienShips();
     this.createPlayerShip();
@@ -44,7 +44,7 @@ class Game {
   }
 
   createPlayerShip() {
-    if (this.lives > 0) {
+    if (this.lives >= 0) {
       return new PlayerShip([27, 13]);
     }
   }
