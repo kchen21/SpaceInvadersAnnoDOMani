@@ -122,6 +122,9 @@ class Game {
   resetPlayerShip() {
     if (this.lives > 0) {
       this.playerShip = new PlayerShip([33,13]);
+      this.playerShip.body.forEach((part) => {
+        updateBoard(part, "grey");
+      });
     }
   }
 
