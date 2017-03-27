@@ -155,6 +155,13 @@ class Game {
       }
     });
   }
+
+  generateAlienShipMissile() {
+    const shootingShips = this.alienShips.filter((ship) => { return ship.shooting });
+    const randomShootingShip = shootingShips[Math.floor(Math.random() * shootingShips.length)];
+
+    createMissile(randomShootingShip.fireMissile());
+  }
 }
 
 modules.export = Game;
