@@ -13,6 +13,19 @@ class Game {
     this.missiles = {};
     this.renderAlienShips();
     this.resetPlayerShip();
+    window.addEventListener("keydown", this.handleKeyEvent.bind(this));
+  }
+
+  handleKeyEvent(event) {
+    event.preventDefault();
+    switch(event.keyCode) {
+      case 37:
+        this.playerShip.move("left");
+        break;
+      case 39:
+        this.playerShip.move("right");
+        break;
+    }
   }
 
   renderAlienShips() {
