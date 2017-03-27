@@ -19,6 +19,9 @@ class Game {
   handleKeyEvent(event) {
     event.preventDefault();
     switch(event.keyCode) {
+      case 32:
+        this.createMissile(this.playerShip.fireMissile());
+        break;
       case 37:
         this.playerShip.move("left");
         break;
