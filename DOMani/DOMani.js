@@ -69,6 +69,8 @@
 	  }
 	};
 	
+	window.$l = $l;
+	
 	document.addEventListener('DOMContentLoaded', function () {
 	  docReady = true;
 	  docReadyCallbacks.forEach(function (func) {
