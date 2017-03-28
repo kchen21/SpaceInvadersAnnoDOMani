@@ -3,7 +3,8 @@ const Coord = require("./coord.js");
 
 class PlayerShip extends Ship {
   constructor(nose) {
-    super(nose);
+    super();
+    this.nose = nose;
     this.body = [];
     this.renderBody(this.nose);
   }

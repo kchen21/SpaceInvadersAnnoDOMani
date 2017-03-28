@@ -51,7 +51,7 @@
 	var docReadyCallbacks = [];
 	var docReady = false;
 	
-	window.$l = function (arg) {
+	var $l = function $l(arg) {
 	  if (typeof arg === 'string') {
 	    // i.e. if it is a CSS selector
 	    var nodeList = document.querySelectorAll(arg);
@@ -76,7 +76,7 @@
 	  });
 	});
 	
-	window.$l.extend = function (baseObj) {
+	$l.extend = function (baseObj) {
 	  for (var _len = arguments.length, objs = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
 	    objs[_key - 1] = arguments[_key];
 	  }
@@ -90,7 +90,7 @@
 	  return baseObj;
 	};
 	
-	window.$l.ajax = function (options) {
+	$l.ajax = function (options) {
 	  if (typeof options === 'undefined') {
 	    options = {};
 	  }
@@ -121,9 +121,9 @@
 	  xhr.send(options.data);
 	};
 	
-	// window.$l.ajax2 returns a promise
+	// $l.ajax2 returns a promise
 	
-	window.$l.ajax2 = function (options) {
+	$l.ajax2 = function (options) {
 	  if (typeof options === 'undefined') {
 	    options = {};
 	  }

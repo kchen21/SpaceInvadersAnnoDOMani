@@ -177,17 +177,17 @@ class Game {
       if (missile.includedIn(this.playerShip.body)) {
         this.destroyShip(this.playerShip);
         this.resetPlayerShip();
+        delete this.missiles[id];
       } else {
         for (let i = 0; i < this.alienShips.length; i++) {
           let ship = this.alienShips[i];
-          if (missile.includedIn(ship.body)) {
+          if (ship.isLive() && missile.includedIn(ship.body)) {
             game.destroyShip(this.ship);
+            delete this.missiles[id];
             break;
           }
         }
       }
-
-      delete this.missiles[id];
     }
   }
 }
