@@ -7,7 +7,7 @@ class Game {
   constructor(lives = 3) {
     this.lives = lives;
     this.board = new Board();
-    this.aliensShips = [];
+    this.alienShips = [];
     this.playerShip = null;
     this.missileId = 0;
     this.missiles = {};
@@ -38,30 +38,32 @@ class Game {
     const alienShipNoses4 = [[8,2], [8,6], [8,10], [8,14], [8,18], [8,22]];
     const alienShipNoses5 = [[5,3], [5,7], [5,11], [5,15], [5,19], [5,23]];
 
+    const game = this;
+
     alienShipNoses1.forEach((nose) => {
       let ship = new AlienShip(nose, "white");
       ship.shooting = true;
-      this.alienShips.push(ship);
+      game.alienShips.push(ship);
     });
 
     alienShipNoses2.forEach((nose) => {
       let ship = new AlienShip(nose, "yellow");
-      this.alienShips.push(ship);
+      game.alienShips.push(ship);
     });
 
     alienShipNoses3.forEach((nose) => {
       let ship = new AlienShip(nose, "green");
-      this.alienShips.push(ship);
+      game.alienShips.push(ship);
     });
 
     alienShipNoses4.forEach((nose) => {
       let ship = new AlienShip(nose, "blue");
-      this.alienShips.push(ship);
+      game.alienShips.push(ship);
     });
 
     alienShipNoses5.forEach((nose) => {
       let ship = new AlienShip(nose, "purple");
-      this.alienShips.push(ship);
+      game.alienShips.push(ship);
     });
   }
 
@@ -123,8 +125,8 @@ class Game {
     if (this.lives > 0) {
       this.playerShip = new PlayerShip([33,13]);
       this.playerShip.body.forEach((part) => {
-        updateBoard(part, "grey");
-      });
+        this.updateBoard(part, "grey");
+      }, this);
     }
   }
 
