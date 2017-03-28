@@ -12,10 +12,10 @@ class SpaceInvadersView {
 
   renderBoard() {
     this.board.grid.forEach((row) => {
-      const $ul = $l("ul");
+      const $ul = $l("<ul></ul>");
       $ul.addClass("group");
       row.forEach((el) => {
-        const $li = $l("li");
+        const $li = $l("<li></li>");
         if (el === "white") {
           $li.addClass("white-alien-ship-part");
         } else if (el === "yellow") {
@@ -42,6 +42,7 @@ class SpaceInvadersView {
     this.game.markAlienShipsOnBoard();
     this.game.markMissilesOnBoard();
     this.renderBoard();
+    debugger
     this.game.moveAlienShipsLR();
     this.game.moveMissiles();
     this.game.resolveMissileCollisions();

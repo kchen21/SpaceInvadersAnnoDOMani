@@ -182,10 +182,10 @@ var SpaceInvadersView = function () {
       var _this = this;
 
       this.board.grid.forEach(function (row) {
-        var $ul = $l("ul");
+        var $ul = $l("<ul></ul>");
         $ul.addClass("group");
         row.forEach(function (el) {
-          var $li = $l("li");
+          var $li = $l("<li></li>");
           if (el === "white") {
             $li.addClass("white-alien-ship-part");
           } else if (el === "yellow") {
@@ -213,6 +213,7 @@ var SpaceInvadersView = function () {
       this.game.markAlienShipsOnBoard();
       this.game.markMissilesOnBoard();
       this.renderBoard();
+      debugger;
       this.game.moveAlienShipsLR();
       this.game.moveMissiles();
       this.game.resolveMissileCollisions();
