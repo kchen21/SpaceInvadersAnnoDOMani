@@ -1,4 +1,5 @@
 const Coord = require("./coord.js");
+const Missile = require("./missile.js");
 
 class Board {
   constructor(width = 27, height = 36) {

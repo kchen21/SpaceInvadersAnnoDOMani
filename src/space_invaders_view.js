@@ -5,15 +5,17 @@ class SpaceInvadersView {
     this.el = el;
     this.game = new Game();
     this.board = this.game.board;
-    this.run();
+    this.interval1 = setInterval(this.runDecisecondIntervalMethods.bind(this), 100);
+    this.interval2 = setInterval(this.game.generateAlienShipMissile.bind(this.game), 5000);
+    this.interval3 = setInterval(this.game.moveAlienShipsDown.bind(this.game), 10000);
   }
 
   renderBoard() {
     this.board.grid.forEach((row) => {
-      const $ul = $l("<ul></ul>");
+      const $ul = $l("ul");
       $ul.addClass("group");
       row.forEach((el) => {
-        const $li = $l("<li></li>");
+        const $li = $l("li");
         if (el === "white") {
           $li.addClass("white-alien-ship-part");
         } else if (el === "yellow") {
@@ -36,23 +38,23 @@ class SpaceInvadersView {
     });
   }
 
-  runIntervalMethods() {
+  runDecisecondIntervalMethods() {
     this.game.markAlienShipsOnBoard();
     this.game.markMissilesOnBoard();
     this.renderBoard();
     this.game.moveAlienShipsLR();
     this.game.moveMissiles();
     this.game.resolveMissileCollisions();
+    this.checkGameStatus();
   }
 
-  run() {
-    while (this.game.lives > 0) {
-      setInterval(this.runIntervalMethods.bind(this), 100);
-      setTimeout(this.game.generateAlienShipMissile.bind(this.game), 5000);
-      setTimeout(this.game.moveAlienShipsDown.bind(this.game), 10000);
+  checkGameStatus() {
+    if (this.game.lives <= 0) {
+      alert("GAME OVER");
+      window.clearInterval(this.interval1);
+      window.clearInterval(this.interval2);
+      window.clearInterval(this.interval3);
     }
-
-    alert("GAME OVER")
   }
 }
 

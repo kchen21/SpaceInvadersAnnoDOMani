@@ -11,7 +11,7 @@ class Coord {
   }
 
   shift(direction) {
-    const deltas = this.directions(direction);
+    const deltas = this.directions[direction];
     this.x += deltas[0];
     this.y += deltas[1];
   }

@@ -94,7 +94,7 @@ var Coord = function () {
   _createClass(Coord, [{
     key: "shift",
     value: function shift(direction) {
-      var deltas = this.directions(direction);
+      var deltas = this.directions[direction];
       this.x += deltas[0];
       this.y += deltas[1];
     }
@@ -171,7 +171,9 @@ var SpaceInvadersView = function () {
     this.el = el;
     this.game = new Game();
     this.board = this.game.board;
-    this.run();
+    this.interval1 = setInterval(this.runDecisecondIntervalMethods.bind(this), 100);
+    this.interval2 = setInterval(this.game.generateAlienShipMissile.bind(this.game), 5000);
+    this.interval3 = setInterval(this.game.moveAlienShipsDown.bind(this.game), 10000);
   }
 
   _createClass(SpaceInvadersView, [{
@@ -180,10 +182,10 @@ var SpaceInvadersView = function () {
       var _this = this;
 
       this.board.grid.forEach(function (row) {
-        var $ul = $l("<ul></ul>");
+        var $ul = $l("ul");
         $ul.addClass("group");
         row.forEach(function (el) {
-          var $li = $l("<li></li>");
+          var $li = $l("li");
           if (el === "white") {
             $li.addClass("white-alien-ship-part");
           } else if (el === "yellow") {
@@ -206,25 +208,25 @@ var SpaceInvadersView = function () {
       });
     }
   }, {
-    key: "runIntervalMethods",
-    value: function runIntervalMethods() {
+    key: "runDecisecondIntervalMethods",
+    value: function runDecisecondIntervalMethods() {
       this.game.markAlienShipsOnBoard();
       this.game.markMissilesOnBoard();
       this.renderBoard();
       this.game.moveAlienShipsLR();
       this.game.moveMissiles();
       this.game.resolveMissileCollisions();
+      this.checkGameStatus();
     }
   }, {
-    key: "run",
-    value: function run() {
-      while (this.game.lives > 0) {
-        setInterval(this.runIntervalMethods.bind(this), 100);
-        setTimeout(this.game.generateAlienShipMissile.bind(this.game), 5000);
-        setTimeout(this.game.moveAlienShipsDown.bind(this.game), 10000);
+    key: "checkGameStatus",
+    value: function checkGameStatus() {
+      if (this.game.lives <= 0) {
+        alert("GAME OVER");
+        window.clearInterval(this.interval1);
+        window.clearInterval(this.interval2);
+        window.clearInterval(this.interval3);
       }
-
-      alert("GAME OVER");
     }
   }]);
 
@@ -310,6 +312,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Coord = __webpack_require__(0);
+var Missile = __webpack_require__(8);
 
 var Board = function () {
   function Board() {
@@ -521,24 +524,35 @@ var Game = function () {
   }, {
     key: "markMissilesOnBoard",
     value: function markMissilesOnBoard() {
-      for (id in this.missiles) {
+      for (var id in this.missiles) {
         var missile = this.missiles[id];
-        updateBoard(missile, "missile");
+        this.updateBoard(missile, "missile");
       }
     }
   }, {
     key: "moveMissiles",
     value: function moveMissiles() {
-      this.missiles.forEach(function (missile) {
-        updateBoard(missile, null);
+      for (var id in this.missiles) {
+        var missile = this.missiles[id];
+        this.updateBoard(missile, null);
         if (missile.origin === "alien") {
           missile.shift("down");
-          updateBoard(missile, "missile");
+
+          if (missile.x > 35) {
+            delete this.missiles[id];
+          } else {
+            this.updateBoard(missile, "missile");
+          }
         } else if (missile.origin === "human") {
           missile.shift("up");
-          updateBoard(missile, "missile");
+
+          if (missile.x < 0) {
+            delete this.missiles[id];
+          } else {
+            this.updateBoard(missile, "missile");
+          }
         }
-      });
+      }
     }
   }, {
     key: "generateAlienShipMissile",
@@ -548,7 +562,7 @@ var Game = function () {
       });
       var randomShootingShip = shootingShips[Math.floor(Math.random() * shootingShips.length)];
 
-      createMissile(randomShootingShip.fireMissile());
+      this.createMissile(randomShootingShip.fireMissile());
     }
   }, {
     key: "mapAlienShipsToTheirBodies",
@@ -562,18 +576,18 @@ var Game = function () {
     value: function resolveMissileCollisions() {
       var game = this;
 
-      for (var _id in this.missiles) {
-        var missile = this.missiles[_id];
+      for (var id in this.missiles) {
+        var missile = this.missiles[id];
         if (missile.includedIn(this.playerShip.body)) {
           this.destroyShip(this.playerShip);
           this.resetPlayerShip();
-          delete this.missiles[_id];
+          delete this.missiles[id];
         } else {
           for (var i = 0; i < this.alienShips.length; i++) {
             var ship = this.alienShips[i];
             if (ship.isLive() && missile.includedIn(ship.body)) {
               game.destroyShip(this.ship);
-              delete this.missiles[_id];
+              delete this.missiles[id];
               break;
             }
           }

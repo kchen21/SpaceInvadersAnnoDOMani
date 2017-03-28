@@ -141,30 +141,41 @@ class Game {
   }
 
   markMissilesOnBoard() {
-    for (id in this.missiles) {
+    for (let id in this.missiles) {
       let missile = this.missiles[id];
-      updateBoard(missile, "missile");
+      this.updateBoard(missile, "missile");
     }
   }
 
   moveMissiles() {
-    this.missiles.forEach((missile) => {
-      updateBoard(missile, null);
+    for (let id in this.missiles) {
+      let missile = this.missiles[id];
+      this.updateBoard(missile, null);
       if (missile.origin === "alien") {
         missile.shift("down");
-        updateBoard(missile, "missile");
+
+        if (missile.x > 35) {
+          delete this.missiles[id];
+        } else {
+          this.updateBoard(missile, "missile");
+        }
       } else if (missile.origin === "human") {
         missile.shift("up");
-        updateBoard(missile, "missile");
+
+        if (missile.x < 0) {
+          delete this.missiles[id];
+        } else {
+          this.updateBoard(missile, "missile");
+        }
       }
-    });
+    }
   }
 
   generateAlienShipMissile() {
     const shootingShips = this.alienShips.filter((ship) => { return ship.shooting });
     const randomShootingShip = shootingShips[Math.floor(Math.random() * shootingShips.length)];
 
-    createMissile(randomShootingShip.fireMissile());
+    this.createMissile(randomShootingShip.fireMissile());
   }
 
   mapAlienShipsToTheirBodies() {
