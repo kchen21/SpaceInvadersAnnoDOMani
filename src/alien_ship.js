@@ -21,6 +21,10 @@ class AlienShip extends Ship {
   fireMissile() {
     return { loc: this.nose, origin: "alien" };
   }
+
+  isLive() {
+    this.color !== "black";
+  }
 }
 
 module.exports = AlienShip;

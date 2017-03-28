@@ -5,6 +5,7 @@ class SpaceInvadersView {
     this.el = el;
     this.game = new Game();
     this.board = this.game.board;
+    this.run();
   }
 
   renderBoard() {
@@ -25,9 +26,31 @@ class SpaceInvadersView {
           $li.addClass("purple-alien-ship-part");
         } else if (el === "missile") {
           $li.addClass("missile");
+        } else if (el === "grey") {
+          $li.addClass("player-ship-part");
         }
-      })
+
+        $ul.append($li);
+      });
+      this.el.append($ul);
     });
+  }
+
+  runIntervalMethods() {
+    this.game.markAlienShipsOnBoard();
+    this.game.markMissilesOnBoard();
+    this.renderBoard();
+    this.game.moveAlienShipsLR();
+    this.game.moveMissiles();
+    this.game.resolveMissileCollisions();
+  }
+
+  run() {
+    while (this.game.lives > 0) {
+      setInterval(this.runIntervalMethods.bind(this), 100);
+      setTimeout(this.game.generateAlienShipMissile.bind(this.game), 5000);
+      setTimeout(this.game.moveAlienShipsDown.bind(this.game), 10000);
+    }
   }
 }
 
