@@ -1,7 +1,7 @@
 const Board = require("./board.js");
 const AlienShip = require("./alien_ship.js");
 const PlayerShip = require("./player_ship.js");
-const Missile = require("./Missile")
+const Missile = require("./missile.js")
 
 class Game {
   constructor(lives = 3) {

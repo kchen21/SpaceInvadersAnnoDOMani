@@ -1,5 +1,5 @@
 const Ship = require("./ship.js");
-const Coord = require("./Coord.js");
+const Coord = require("./coord.js");
 
 class PlayerShip extends Ship {
   constructor(nose) {

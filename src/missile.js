@@ -1,4 +1,4 @@
-const Coord = require("./Coord.js");
+const Coord = require("./coord.js");
 
 class Missile extends Coord {
   constructor(x, y, id, origin) {
