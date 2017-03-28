@@ -151,7 +151,7 @@ class Game {
       if (missile.origin === "alien") {
         missile.shift("down");
         updateBoard(missile, "missile");
-      } else if (missile.origin) === "human") {
+      } else if (missile.origin === "human") {
         missile.shift("up");
         updateBoard(missile, "missile");
       }
@@ -178,12 +178,13 @@ class Game {
         this.destroyShip(this.playerShip);
         this.resetPlayerShip();
       } else {
-        this.alienShips.forEach((alienShip) => {
-          if (missile.includedIn(alienShip.body)) {
-            game.destroyShip(this.alienShip);
+        for (let i = 0; i < this.alienShips.length; i++) {
+          let ship = this.alienShips[i];
+          if (missile.includedIn(ship.body)) {
+            game.destroyShip(this.ship);
             break;
           }
-        });
+        }
       }
 
       delete this.missiles[id];

@@ -9,7 +9,7 @@ class SpaceInvadersView {
   }
 
   renderBoard() {
-    this.board.grid.forEach({(row) => {
+    this.board.grid.forEach((row) => {
       const $ul = $l("<ul></ul>");
       $ul.addClass("group");
       row.forEach((el) => {
@@ -51,6 +51,8 @@ class SpaceInvadersView {
       setTimeout(this.game.generateAlienShipMissile.bind(this.game), 5000);
       setTimeout(this.game.moveAlienShipsDown.bind(this.game), 10000);
     }
+
+    alert("GAME OVER")
   }
 }
 
