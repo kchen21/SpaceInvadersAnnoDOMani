@@ -2,4 +2,4 @@ class Shield {
 
 }
 
-modules.export = Shield;
+module.exports = Shield;

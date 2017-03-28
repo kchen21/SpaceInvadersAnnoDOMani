@@ -120,7 +120,7 @@ module.exports = Coord;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {
+
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -148,38 +148,10 @@ var Ship = function () {
   return Ship;
 }();
 
-module.export = Ship;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
+module.exports = Ship;
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
+/* 2 */,
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -270,6 +242,8 @@ module.exports = SpaceInvadersView;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -285,10 +259,8 @@ var AlienShip = function (_Ship) {
   function AlienShip(nose, color) {
     _classCallCheck(this, AlienShip);
 
-    var _this = _possibleConstructorReturn(this, (AlienShip.__proto__ || Object.getPrototypeOf(AlienShip)).call(this));
+    var _this = _possibleConstructorReturn(this, (AlienShip.__proto__ || Object.getPrototypeOf(AlienShip)).call(this, nose));
 
-    _this.nose = nose;
-    _this.body = [];
     _this.color = color;
     _this.direction = "right";
     _this.shooting = false;
@@ -297,6 +269,11 @@ var AlienShip = function (_Ship) {
   }
 
   _createClass(AlienShip, [{
+    key: "move",
+    value: function move(direction) {
+      return _get(AlienShip.prototype.__proto__ || Object.getPrototypeOf(AlienShip.prototype), "move", this).call(this, direction);
+    }
+  }, {
     key: "renderBody",
     value: function renderBody(nose) {
       this.body.push(new Coord(nose[0], nose[1]));
@@ -326,7 +303,7 @@ module.exports = AlienShip;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {
+
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -368,8 +345,7 @@ var Board = function () {
   return Board;
 }();
 
-module.export = Board;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
+module.exports = Board;
 
 /***/ }),
 /* 6 */
@@ -607,7 +583,7 @@ var Game = function () {
   return Game;
 }();
 
-modules.export = Game;
+module.exports = Game;
 
 /***/ }),
 /* 7 */
@@ -644,10 +620,8 @@ var Missile = function (_Coord) {
   function Missile(x, y, id, origin) {
     _classCallCheck(this, Missile);
 
-    var _this = _possibleConstructorReturn(this, (Missile.__proto__ || Object.getPrototypeOf(Missile)).call(this));
+    var _this = _possibleConstructorReturn(this, (Missile.__proto__ || Object.getPrototypeOf(Missile)).call(this, x, y));
 
-    _this.x = x;
-    _this.y = y;
     _this.id = id;
     _this.origin = origin;
     _this.directions = {
@@ -662,6 +636,8 @@ var Missile = function (_Coord) {
   return Missile;
 }(Coord);
 
+module.exports = Missile;
+
 /***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -670,6 +646,8 @@ var Missile = function (_Coord) {
 
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -686,15 +664,18 @@ var PlayerShip = function (_Ship) {
   function PlayerShip(nose) {
     _classCallCheck(this, PlayerShip);
 
-    var _this = _possibleConstructorReturn(this, (PlayerShip.__proto__ || Object.getPrototypeOf(PlayerShip)).call(this));
+    var _this = _possibleConstructorReturn(this, (PlayerShip.__proto__ || Object.getPrototypeOf(PlayerShip)).call(this, nose));
 
-    _this.nose = nose;
-    _this.body = [];
     _this.renderBody(_this.nose);
     return _this;
   }
 
   _createClass(PlayerShip, [{
+    key: "move",
+    value: function move(direction) {
+      return _get(PlayerShip.prototype.__proto__ || Object.getPrototypeOf(PlayerShip.prototype), "move", this).call(this, direction);
+    }
+  }, {
     key: "renderBody",
     value: function renderBody(nose) {
       this.body.push(new Coord(nose[0], nose[1]));
@@ -712,7 +693,7 @@ var PlayerShip = function (_Ship) {
   return PlayerShip;
 }(Ship);
 
-modules.export = PlayerShip;
+module.exports = PlayerShip;
 
 /***/ })
 /******/ ]);

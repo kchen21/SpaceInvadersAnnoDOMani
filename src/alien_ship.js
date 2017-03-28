@@ -3,13 +3,15 @@ const Coord = require("./coord.js");
 
 class AlienShip extends Ship {
   constructor(nose, color) {
-    super();
-    this.nose = nose;
-    this.body = [];
+    super(nose);
     this.color = color;
     this.direction = "right";
     this.shooting = false;
     this.renderBody(this.nose);
+  }
+
+  move(direction) {
+    return super.move(direction);
   }
 
   renderBody(nose) {

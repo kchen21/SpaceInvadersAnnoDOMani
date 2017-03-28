@@ -23,4 +23,4 @@ class Board {
   }
 }
 
-module.export = Board;
+module.exports = Board;

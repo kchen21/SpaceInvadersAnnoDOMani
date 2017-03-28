@@ -2,9 +2,7 @@ const Coord = require("./coord.js");
 
 class Missile extends Coord {
   constructor(x, y, id, origin) {
-    super();
-    this.x = x;
-    this.y = y;
+    super(x, y);
     this.id = id;
     this.origin = origin;
     this.directions = {
@@ -15,3 +13,5 @@ class Missile extends Coord {
     };
   }
 }
+
+module.exports = Missile;

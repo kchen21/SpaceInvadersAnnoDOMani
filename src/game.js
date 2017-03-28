@@ -192,4 +192,4 @@ class Game {
   }
 }
 
-modules.export = Game;
+module.exports = Game;
