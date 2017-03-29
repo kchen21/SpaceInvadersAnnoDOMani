@@ -181,8 +181,8 @@ var SpaceInvadersView = function () {
     value: function renderBoard() {
       var _this = this;
 
-      this.board.grid.forEach(function (row) {
-        var $ul = $l("<ul></ul>");
+      this.board.grid.forEach(function (row, i) {
+        var $ul = $l('<ul></ul>');
         $ul.addClass("group");
         row.forEach(function (el) {
           var $li = $l("<li></li>");

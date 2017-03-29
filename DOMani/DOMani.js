@@ -46,17 +46,32 @@
 
 	'use strict';
 	
+	var _helper_methods = __webpack_require__(2);
+	
+	var HelperMethods = _interopRequireWildcard(_helper_methods);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
 	var DOMNodeCollection = __webpack_require__(1);
+	
 	
 	var docReadyCallbacks = [];
 	var docReady = false;
 	
 	var $l = function $l(arg) {
 	  if (typeof arg === 'string') {
-	    // i.e. if it is a CSS selector
-	    var nodeList = document.querySelectorAll(arg);
-	    var htmlElements = Array.apply(null, nodeList);
-	    return new DOMNodeCollection(htmlElements);
+	    if (HelperMethods.forCreatingElement(arg)) {
+	      var tag = HelperMethods.parseTag(arg);
+	      var innerHTML = HelperMethods.parseInnerHTML(arg, tag.length);
+	      var newHTMLElement = document.createElement(tag);
+	      newHTMLElement.innerHTML = innerHTML;
+	      return new DOMNodeCollection([newHTMLElement]);
+	    } else {
+	      // i.e. if it is a CSS selector
+	      var nodeList = document.querySelectorAll(arg);
+	      var htmlElements = Array.apply(null, nodeList);
+	      return new DOMNodeCollection(htmlElements);
+	    }
 	  } else if (arg instanceof HTMLElement) {
 	    var element = [arg];
 	    return new DOMNodeCollection(element);
@@ -227,7 +242,9 @@
 	    key: 'remove',
 	    value: function remove() {
 	      this.htmlElements.forEach(function (el) {
-	        el.parentNode.removeChild(el);
+	        if (el.parentNode) {
+	          el.parentNode.removeChild(el);
+	        }
 	      });
 	
 	      var removedElements = this.htmlElements;
@@ -343,6 +360,37 @@
 	}();
 	
 	module.exports = DOMNodeCollection;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var forCreatingElement = exports.forCreatingElement = function forCreatingElement(str) {
+	  return str[0] === "<" && str.slice(-1) === ">";
+	};
+	
+	var parseTag = exports.parseTag = function parseTag(str) {
+	  var tag = "";
+	
+	  for (var i = 1; i < str.length; i++) {
+	    if (str[i] === ">") {
+	      break;
+	    } else {
+	      tag += str[i];
+	    }
+	  }
+	
+	  return tag;
+	};
+	
+	var parseInnerHTML = exports.parseInnerHTML = function parseInnerHTML(str, tagLength) {
+	  return str.slice(tagLength + 2, str.length - tagLength - 3);
+	};
 
 /***/ }
 /******/ ]);
