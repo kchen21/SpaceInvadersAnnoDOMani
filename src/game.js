@@ -187,14 +187,14 @@ class Game {
 
     for (let id in this.missiles) {
       let missile = this.missiles[id];
-      if (missile.includedIn(this.playerShip.body)) {
+      if (missile.origin === "alien" && missile.includedIn(this.playerShip.body)) {
         this.destroyShip(this.playerShip);
         this.resetPlayerShip();
         delete this.missiles[id];
       } else {
         for (let i = 0; i < this.alienShips.length; i++) {
           let ship = this.alienShips[i];
-          if (ship.isLive() && missile.includedIn(ship.body)) {
+          if (missile.origin === "human" && ship.isLive() && missile.includedIn(ship.body)) {
             game.destroyShip(this.ship);
             delete this.missiles[id];
             break;

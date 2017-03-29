@@ -11,6 +11,7 @@ class SpaceInvadersView {
   }
 
   renderBoard() {
+    this.el.empty();
     this.board.grid.forEach((row, i) => {
       const $ul = $l("<ul></ul>");
       $ul.addClass("group");

@@ -219,6 +219,7 @@ var SpaceInvadersView = function () {
     value: function renderBoard() {
       var _this = this;
 
+      this.el.empty();
       this.board.grid.forEach(function (row, i) {
         var $ul = $l("<ul></ul>");
         $ul.addClass("group");
@@ -616,14 +617,14 @@ var Game = function () {
 
       for (var id in this.missiles) {
         var missile = this.missiles[id];
-        if (missile.includedIn(this.playerShip.body)) {
+        if (missile.origin === "alien" && missile.includedIn(this.playerShip.body)) {
           this.destroyShip(this.playerShip);
           this.resetPlayerShip();
           delete this.missiles[id];
         } else {
           for (var i = 0; i < this.alienShips.length; i++) {
             var ship = this.alienShips[i];
-            if (ship.isLive() && missile.includedIn(ship.body)) {
+            if (missile.origin === "human" && ship.isLive() && missile.includedIn(ship.body)) {
               game.destroyShip(this.ship);
               delete this.missiles[id];
               break;
