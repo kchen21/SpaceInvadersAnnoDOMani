@@ -489,8 +489,8 @@ var Game = function () {
       });
     }
   }, {
-    key: "clearAllAlienShipsFromBoard",
-    value: function clearAllAlienShipsFromBoard() {
+    key: "clearAlienShipsFromBoard",
+    value: function clearAlienShipsFromBoard() {
       var game = this;
 
       this.alienShips.forEach(function (ship) {

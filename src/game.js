@@ -77,7 +77,7 @@ class Game {
     });
   }
 
-  clearAllAlienShipsFromBoard() {
+  clearAlienShipsFromBoard() {
     const game = this;
 
     this.alienShips.forEach((ship) => {
