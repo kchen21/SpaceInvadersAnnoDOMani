@@ -122,6 +122,45 @@ module.exports = Coord;
 "use strict";
 
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Coord = __webpack_require__(0);
+
+var Missile = function (_Coord) {
+  _inherits(Missile, _Coord);
+
+  function Missile(x, y, id, origin) {
+    _classCallCheck(this, Missile);
+
+    var _this = _possibleConstructorReturn(this, (Missile.__proto__ || Object.getPrototypeOf(Missile)).call(this, x, y));
+
+    _this.id = id;
+    _this.origin = origin;
+    _this.directions = {
+      "up": [-1, 0],
+      "down": [1, 0],
+      "right": [0, 1],
+      "left": [0, -1]
+    };
+    return _this;
+  }
+
+  return Missile;
+}(Coord);
+
+module.exports = Missile;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -151,7 +190,6 @@ var Ship = function () {
 module.exports = Ship;
 
 /***/ }),
-/* 2 */,
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -182,7 +220,7 @@ var SpaceInvadersView = function () {
       var _this = this;
 
       this.board.grid.forEach(function (row, i) {
-        var $ul = $l('<ul></ul>');
+        var $ul = $l("<ul></ul>");
         $ul.addClass("group");
         row.forEach(function (el) {
           var $li = $l("<li></li>");
@@ -213,7 +251,6 @@ var SpaceInvadersView = function () {
       this.game.markAlienShipsOnBoard();
       this.game.markMissilesOnBoard();
       this.renderBoard();
-      debugger;
       this.game.moveAlienShipsLR();
       this.game.moveMissiles();
       this.game.resolveMissileCollisions();
@@ -253,7 +290,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Ship = __webpack_require__(1);
+var Ship = __webpack_require__(2);
 var Coord = __webpack_require__(0);
 
 var AlienShip = function (_Ship) {
@@ -313,7 +350,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Coord = __webpack_require__(0);
-var Missile = __webpack_require__(8);
+var Missile = __webpack_require__(1);
 
 var Board = function () {
   function Board() {
@@ -364,8 +401,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var Board = __webpack_require__(5);
 var AlienShip = __webpack_require__(4);
-var PlayerShip = __webpack_require__(9);
-var Missile = __webpack_require__(8);
+var PlayerShip = __webpack_require__(8);
+var Missile = __webpack_require__(1);
 
 var Game = function () {
   function Game() {
@@ -623,45 +660,6 @@ $l(function () {
 "use strict";
 
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Coord = __webpack_require__(0);
-
-var Missile = function (_Coord) {
-  _inherits(Missile, _Coord);
-
-  function Missile(x, y, id, origin) {
-    _classCallCheck(this, Missile);
-
-    var _this = _possibleConstructorReturn(this, (Missile.__proto__ || Object.getPrototypeOf(Missile)).call(this, x, y));
-
-    _this.id = id;
-    _this.origin = origin;
-    _this.directions = {
-      "up": [-1, 0],
-      "down": [1, 0],
-      "right": [0, 1],
-      "left": [0, -1]
-    };
-    return _this;
-  }
-
-  return Missile;
-}(Coord);
-
-module.exports = Missile;
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
@@ -672,7 +670,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Ship = __webpack_require__(1);
+var Ship = __webpack_require__(2);
 var Coord = __webpack_require__(0);
 
 var PlayerShip = function (_Ship) {

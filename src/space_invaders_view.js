@@ -42,7 +42,6 @@ class SpaceInvadersView {
     this.game.markAlienShipsOnBoard();
     this.game.markMissilesOnBoard();
     this.renderBoard();
-    debugger
     this.game.moveAlienShipsLR();
     this.game.moveMissiles();
     this.game.resolveMissileCollisions();
