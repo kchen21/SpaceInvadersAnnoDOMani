@@ -94,9 +94,9 @@ class Game {
       let rightmostShipIndex = (((Math.floor(idx / 6)) + 1) * 6) - 1;
       let rightmostShip = arr[rightmostShipIndex];
 
-      if (rightmostShip.body[3].x === 26) {
+      if (rightmostShip.body[3].y === 26) {
         ship.direction = "left";
-      } else if (leftmostShip.body[2].x === 0) {
+      } else if (leftmostShip.body[2].y === 0) {
         ship.direction = "right";
       }
 

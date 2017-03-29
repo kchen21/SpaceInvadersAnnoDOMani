@@ -252,7 +252,6 @@ var SpaceInvadersView = function () {
       this.game.markAlienShipsOnBoard();
       this.game.markMissilesOnBoard();
       this.renderBoard();
-      debugger;
       this.game.clearAlienShipsFromBoard();
       this.game.moveAlienShipsLR();
       this.game.moveMissiles();
@@ -508,9 +507,9 @@ var Game = function () {
         var rightmostShipIndex = (Math.floor(idx / 6) + 1) * 6 - 1;
         var rightmostShip = arr[rightmostShipIndex];
 
-        if (rightmostShip.body[3].x === 26) {
+        if (rightmostShip.body[3].y === 26) {
           ship.direction = "left";
-        } else if (leftmostShip.body[2].x === 0) {
+        } else if (leftmostShip.body[2].y === 0) {
           ship.direction = "right";
         }
 
