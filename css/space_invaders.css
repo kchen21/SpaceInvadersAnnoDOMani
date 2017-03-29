@@ -16,9 +16,37 @@ li {
   height: 15px;
   border: 1px solid #eee;
   float: left;
-  background-color: #fff;
+  background-color: #000;
 }
 
 h1 {
   margin: 20px 0px;
+}
+
+.white-alien-ship-part {
+  background-color: white;
+}
+
+.yellow-alien-ship-part {
+  background-color: yellow;
+}
+
+.green-alien-ship-part {
+  background-color: green;
+}
+
+.blue-alien-ship-part {
+  background-color: blue;
+}
+
+.purple-alien-ship-part {
+  background-color: purple;
+}
+
+.missile {
+  background-color: red;
+}
+
+.player-ship-part {
+  background-color: grey;
 }
