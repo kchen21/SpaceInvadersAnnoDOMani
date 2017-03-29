@@ -77,6 +77,16 @@ class Game {
     });
   }
 
+  clearAllAlienShipsFromBoard() {
+    const game = this;
+
+    this.alienShips.forEach((ship) => {
+      ship.body.forEach((part) => {
+        game.updateBoard(part, null);
+      });
+    });
+  }
+
   moveAlienShipsLR() {
     this.alienShips.forEach((ship, idx, arr) => {
       let leftmostShipIndex = (Math.floor(idx / 6)) * 6;

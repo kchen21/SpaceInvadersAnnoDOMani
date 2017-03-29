@@ -253,6 +253,7 @@ var SpaceInvadersView = function () {
       this.game.markMissilesOnBoard();
       this.renderBoard();
       debugger;
+      this.game.clearAlienShipsFromBoard();
       this.game.moveAlienShipsLR();
       this.game.moveMissiles();
       this.game.resolveMissileCollisions();
@@ -484,6 +485,17 @@ var Game = function () {
       this.alienShips.forEach(function (ship) {
         ship.body.forEach(function (part) {
           game.updateBoard(part, ship.color);
+        });
+      });
+    }
+  }, {
+    key: "clearAllAlienShipsFromBoard",
+    value: function clearAllAlienShipsFromBoard() {
+      var game = this;
+
+      this.alienShips.forEach(function (ship) {
+        ship.body.forEach(function (part) {
+          game.updateBoard(part, null);
         });
       });
     }
