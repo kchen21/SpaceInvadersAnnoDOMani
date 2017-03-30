@@ -250,6 +250,7 @@ var SpaceInvadersView = function () {
   }, {
     key: "runDecisecondIntervalMethods",
     value: function runDecisecondIntervalMethods() {
+      this.checkGameStatus();
       this.game.markAlienShipsOnBoard();
       this.game.markPlayerShipOnBoard();
       this.game.markMissilesOnBoard();
@@ -259,12 +260,11 @@ var SpaceInvadersView = function () {
       this.game.moveAlienShipsLR();
       this.game.moveMissiles();
       this.game.resolveMissileCollisions();
-      this.checkGameStatus();
     }
   }, {
     key: "checkGameStatus",
     value: function checkGameStatus() {
-      if (this.game.lives <= 0) {
+      if (this.game.lives === 0) {
         alert("GAME OVER");
         window.clearInterval(this.interval1);
         window.clearInterval(this.interval2);
@@ -536,11 +536,13 @@ var Game = function () {
   }, {
     key: "destroyShip",
     value: function destroyShip(ship) {
+      var game = this;
+
       if (ship instanceof PlayerShip) {
         this.lives -= 1;
         this.playerShip = null;
         ship.body.forEach(function (part) {
-          game.updatedBoard(part, null);
+          game.updateBoard(part, null);
         });
       } else if (ship instanceof AlienShip) {
         var alienShipIndex = this.alienShips.indexOf(ship);
@@ -551,7 +553,7 @@ var Game = function () {
         this.alienShips[alienShipIndex].shooting = false;
         this.alienShips[alienShipIndex + 6].shooting = true;
         ship.body.forEach(function (part) {
-          game.updatedBoard(part, null);
+          game.updateBoard(part, null);
         });
       }
     }
@@ -648,15 +650,15 @@ var Game = function () {
       for (var id in this.missiles) {
         var missile = this.missiles[id];
         if (missile.origin === "alien" && missile.includedIn(this.playerShip.body)) {
+          delete this.missiles[id];
           this.destroyShip(this.playerShip);
           this.resetPlayerShip();
-          delete this.missiles[id];
         } else {
           for (var i = 0; i < this.alienShips.length; i++) {
             var ship = this.alienShips[i];
             if (missile.origin === "human" && ship.isLive() && missile.includedIn(ship.body)) {
-              game.destroyShip(this.ship);
               delete this.missiles[id];
+              game.destroyShip(this.ship);
               break;
             }
           }

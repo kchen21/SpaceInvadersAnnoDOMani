@@ -40,6 +40,7 @@ class SpaceInvadersView {
   }
 
   runDecisecondIntervalMethods() {
+    this.checkGameStatus();
     this.game.markAlienShipsOnBoard();
     this.game.markPlayerShipOnBoard();
     this.game.markMissilesOnBoard();
@@ -49,11 +50,10 @@ class SpaceInvadersView {
     this.game.moveAlienShipsLR();
     this.game.moveMissiles();
     this.game.resolveMissileCollisions();
-    this.checkGameStatus();
   }
 
   checkGameStatus() {
-    if (this.game.lives <= 0) {
+    if (this.game.lives === 0) {
       alert("GAME OVER");
       window.clearInterval(this.interval1);
       window.clearInterval(this.interval2);

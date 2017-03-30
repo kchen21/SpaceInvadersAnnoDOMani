@@ -117,11 +117,13 @@ class Game {
   }
 
   destroyShip(ship) {
+    const game = this;
+
     if (ship instanceof PlayerShip) {
       this.lives -= 1;
       this.playerShip = null;
       ship.body.forEach((part) => {
-        game.updatedBoard(part, null);
+        game.updateBoard(part, null);
       });
     } else if (ship instanceof AlienShip) {
       const alienShipIndex = this.alienShips.indexOf(ship);
@@ -132,7 +134,7 @@ class Game {
       this.alienShips[alienShipIndex].shooting = false;
       this.alienShips[alienShipIndex + 6].shooting = true;
       ship.body.forEach((part) => {
-        game.updatedBoard(part, null);
+        game.updateBoard(part, null);
       });
     }
   }
@@ -209,15 +211,15 @@ class Game {
     for (let id in this.missiles) {
       let missile = this.missiles[id];
       if (missile.origin === "alien" && missile.includedIn(this.playerShip.body)) {
+        delete this.missiles[id];
         this.destroyShip(this.playerShip);
         this.resetPlayerShip();
-        delete this.missiles[id];
       } else {
         for (let i = 0; i < this.alienShips.length; i++) {
           let ship = this.alienShips[i];
           if (missile.origin === "human" && ship.isLive() && missile.includedIn(ship.body)) {
-            game.destroyShip(this.ship);
             delete this.missiles[id];
+            game.destroyShip(this.ship);
             break;
           }
         }
