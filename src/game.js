@@ -31,6 +31,10 @@ class Game {
     }
   }
 
+  updateBoard(coord, val) {
+    this.board.updateGrid(coord, val);
+  }
+
   renderAlienShips() {
     const alienShipNoses1 = [[17,3], [17,7], [17,11], [17,15], [17,19], [17,23]];
     const alienShipNoses2 = [[14,2], [14,6], [14,10], [14,14], [14,18], [14,22]];
@@ -136,14 +140,19 @@ class Game {
   resetPlayerShip() {
     if (this.lives > 0) {
       this.playerShip = new PlayerShip([33,13]);
-      this.playerShip.body.forEach((part) => {
-        this.updateBoard(part, "grey");
-      }, this);
     }
   }
 
-  updateBoard(coord, val) {
-    this.board.updateGrid(coord, val);
+  markPlayerShipOnBoard() {
+    this.playerShip.body.forEach((part) => {
+      this.updateBoard(part, "grey");
+    }, this);
+  }
+
+  clearPlayerShipFromBoard() {
+    this.playerShip.body.forEach((part) => {
+      this.updateBoard(part, null);
+    }, this);
   }
 
   createMissile({loc, origin}) {

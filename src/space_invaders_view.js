@@ -41,9 +41,11 @@ class SpaceInvadersView {
 
   runDecisecondIntervalMethods() {
     this.game.markAlienShipsOnBoard();
+    this.game.markPlayerShipOnBoard();
     this.game.markMissilesOnBoard();
     this.renderBoard();
     this.game.clearAlienShipsFromBoard();
+    this.game.clearPlayerShipFromBoard();
     this.game.moveAlienShipsLR();
     this.game.moveMissiles();
     this.game.resolveMissileCollisions();

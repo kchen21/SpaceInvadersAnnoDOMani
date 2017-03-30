@@ -250,9 +250,11 @@ var SpaceInvadersView = function () {
     key: "runDecisecondIntervalMethods",
     value: function runDecisecondIntervalMethods() {
       this.game.markAlienShipsOnBoard();
+      this.game.markPlayerShipOnBoard();
       this.game.markMissilesOnBoard();
       this.renderBoard();
       this.game.clearAlienShipsFromBoard();
+      this.game.clearPlayerShipFromBoard();
       this.game.moveAlienShipsLR();
       this.game.moveMissiles();
       this.game.resolveMissileCollisions();
@@ -440,6 +442,11 @@ var Game = function () {
       }
     }
   }, {
+    key: "updateBoard",
+    value: function updateBoard(coord, val) {
+      this.board.updateGrid(coord, val);
+    }
+  }, {
     key: "renderAlienShips",
     value: function renderAlienShips() {
       var alienShipNoses1 = [[17, 3], [17, 7], [17, 11], [17, 15], [17, 19], [17, 23]];
@@ -550,19 +557,27 @@ var Game = function () {
   }, {
     key: "resetPlayerShip",
     value: function resetPlayerShip() {
-      var _this = this;
-
       if (this.lives > 0) {
         this.playerShip = new PlayerShip([33, 13]);
-        this.playerShip.body.forEach(function (part) {
-          _this.updateBoard(part, "grey");
-        }, this);
       }
     }
   }, {
-    key: "updateBoard",
-    value: function updateBoard(coord, val) {
-      this.board.updateGrid(coord, val);
+    key: "markPlayerShipOnBoard",
+    value: function markPlayerShipOnBoard() {
+      var _this = this;
+
+      this.playerShip.body.forEach(function (part) {
+        _this.updateBoard(part, "grey");
+      }, this);
+    }
+  }, {
+    key: "clearPlayerShipFromBoard",
+    value: function clearPlayerShipFromBoard() {
+      var _this2 = this;
+
+      this.playerShip.body.forEach(function (part) {
+        _this2.updateBoard(part, null);
+      }, this);
     }
   }, {
     key: "createMissile",
