@@ -181,6 +181,7 @@ var Ship = function () {
       this.body.forEach(function (part) {
         part.shift(direction);
       });
+      this.nose = [this.body[0].x, this.body[0].y];
     }
   }]);
 
@@ -209,7 +210,7 @@ var SpaceInvadersView = function () {
     this.el = el;
     this.game = new Game();
     this.board = this.game.board;
-    this.interval1 = setInterval(this.runDecisecondIntervalMethods.bind(this), 100);
+    this.interval1 = setInterval(this.runDecisecondIntervalMethods.bind(this), 500);
     this.interval2 = setInterval(this.game.generateAlienShipMissile.bind(this.game), 5000);
     this.interval3 = setInterval(this.game.moveAlienShipsDown.bind(this.game), 10000);
   }

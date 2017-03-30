@@ -10,6 +10,7 @@ class Ship {
     this.body.forEach((part) => {
       part.shift(direction);
     });
+    this.nose = [this.body[0].x, this.body[0].y];
   }
 }
 
