@@ -509,7 +509,9 @@ var Game = function () {
 
         if (rightmostShip.body[3].y === 26) {
           ship.direction = "left";
-        } else if (leftmostShip.body[2].y === 0) {
+        } else if (leftmostShip.body[2].y === 1 && leftmostShip.direction === "right") {
+          ship.direction = "right";
+        } else if (ship === leftmostShip && ship.body[2].y === 0 && ship.direction === "left") {
           ship.direction = "right";
         }
 
