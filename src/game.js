@@ -1,5 +1,6 @@
 const Board = require("./board.js");
 const AlienShip = require("./alien_ship.js");
+const Shield = require("./shield.js");
 const PlayerShip = require("./player_ship.js");
 const Missile = require("./missile.js")
 
@@ -8,10 +9,12 @@ class Game {
     this.lives = lives;
     this.board = new Board();
     this.alienShips = [];
+    this.shields = [];
     this.playerShip = null;
     this.missileId = 0;
     this.missiles = {};
     this.renderAlienShips();
+    this.renderShields();
     this.resetPlayerShip();
     window.addEventListener("keydown", this.handleKeyEvent.bind(this));
   }
@@ -162,6 +165,24 @@ class Game {
     this.playerShip.body.forEach((part) => {
       this.updateBoard(part, null);
     }, this);
+  }
+
+  renderShields() {
+    const shieldBosses = [[29,4], [29,10], [29,16], [29,22]];
+
+    shieldBosses.forEach((boss) => {
+      let shield = new Shield(boss);
+      this.shields.push(shield);
+    }, this);
+  }
+
+  markShieldsOnBoard() {
+    const game = this;
+    this.shields.forEach((shield) => {
+      shield.parts.forEach((part) => {
+        game.updateBoard(part, "orange");
+      });
+    });
   }
 
   createMissile({loc, origin}) {

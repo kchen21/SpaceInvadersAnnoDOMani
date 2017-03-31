@@ -43,10 +43,14 @@ h1 {
   background-color: purple;
 }
 
-.missile {
-  background-color: red;
+.shield-part {
+  background-color: orange;
 }
 
 .player-ship-part {
   background-color: grey;
+}
+
+.missile {
+  background-color: red;
 }

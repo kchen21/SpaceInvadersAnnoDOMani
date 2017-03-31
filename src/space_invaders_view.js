@@ -27,10 +27,12 @@ class SpaceInvadersView {
           $li.addClass("blue-alien-ship-part");
         } else if (el === "purple") {
           $li.addClass("purple-alien-ship-part");
-        } else if (el === "missile") {
-          $li.addClass("missile");
+        } else if (el === "orange") {
+          $li.addClass("shield-part");
         } else if (el === "grey") {
           $li.addClass("player-ship-part");
+        } else if (el === "missile") {
+          $li.addClass("missile");
         }
 
         $ul.append($li);
@@ -42,6 +44,7 @@ class SpaceInvadersView {
   runDecisecondIntervalMethods() {
     this.checkGameStatus();
     this.game.markAlienShipsOnBoard();
+    this.game.markShieldsOnBoard();
     this.game.markPlayerShipOnBoard();
     this.game.markMissilesOnBoard();
     this.renderBoard();

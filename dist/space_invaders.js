@@ -236,10 +236,12 @@ var SpaceInvadersView = function () {
             $li.addClass("blue-alien-ship-part");
           } else if (el === "purple") {
             $li.addClass("purple-alien-ship-part");
-          } else if (el === "missile") {
-            $li.addClass("missile");
+          } else if (el === "orange") {
+            $li.addClass("shield-part");
           } else if (el === "grey") {
             $li.addClass("player-ship-part");
+          } else if (el === "missile") {
+            $li.addClass("missile");
           }
 
           $ul.append($li);
@@ -252,6 +254,7 @@ var SpaceInvadersView = function () {
     value: function runDecisecondIntervalMethods() {
       this.checkGameStatus();
       this.game.markAlienShipsOnBoard();
+      this.game.markShieldsOnBoard();
       this.game.markPlayerShipOnBoard();
       this.game.markMissilesOnBoard();
       this.renderBoard();
@@ -406,6 +409,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var Board = __webpack_require__(5);
 var AlienShip = __webpack_require__(4);
+var Shield = __webpack_require__(9);
 var PlayerShip = __webpack_require__(8);
 var Missile = __webpack_require__(1);
 
@@ -418,10 +422,12 @@ var Game = function () {
     this.lives = lives;
     this.board = new Board();
     this.alienShips = [];
+    this.shields = [];
     this.playerShip = null;
     this.missileId = 0;
     this.missiles = {};
     this.renderAlienShips();
+    this.renderShields();
     this.resetPlayerShip();
     window.addEventListener("keydown", this.handleKeyEvent.bind(this));
   }
@@ -588,6 +594,28 @@ var Game = function () {
       this.playerShip.body.forEach(function (part) {
         _this2.updateBoard(part, null);
       }, this);
+    }
+  }, {
+    key: "renderShields",
+    value: function renderShields() {
+      var _this3 = this;
+
+      var shieldBosses = [[29, 4], [29, 10], [29, 16], [29, 22]];
+
+      shieldBosses.forEach(function (boss) {
+        var shield = new Shield(boss);
+        _this3.shields.push(shield);
+      }, this);
+    }
+  }, {
+    key: "markShieldsOnBoard",
+    value: function markShieldsOnBoard() {
+      var game = this;
+      this.shields.forEach(function (shield) {
+        shield.parts.forEach(function (part) {
+          game.updateBoard(part, "orange");
+        });
+      });
     }
   }, {
     key: "createMissile",
@@ -773,6 +801,44 @@ var PlayerShip = function (_Ship) {
 }(Ship);
 
 module.exports = PlayerShip;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Coord = __webpack_require__(0);
+
+var Shield = function () {
+  function Shield(boss) {
+    _classCallCheck(this, Shield);
+
+    this.boss = boss;
+    this.parts = [];
+    this.renderParts(this.boss);
+  }
+
+  _createClass(Shield, [{
+    key: "renderParts",
+    value: function renderParts(boss) {
+      this.parts.push(new Coord(boss[0], boss[1]));
+      this.parts.push(new Coord(boss[0] + 1, boss[1] - 1));
+      this.parts.push(new Coord(boss[0] + 2, boss[1] - 2));
+      this.parts.push(new Coord(boss[0] + 1, boss[1] + 1));
+      this.parts.push(new Coord(boss[0] + 2, boss[1] + 2));
+    }
+  }]);
+
+  return Shield;
+}();
+
+module.exports = Shield;
 
 /***/ })
 /******/ ]);
