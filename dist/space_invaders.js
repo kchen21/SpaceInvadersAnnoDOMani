@@ -613,7 +613,9 @@ var Game = function () {
       var game = this;
       this.shields.forEach(function (shield) {
         shield.parts.forEach(function (part) {
-          game.updateBoard(part, "orange");
+          if (part.active === true) {
+            game.updateBoard(part, "orange");
+          }
         });
       });
     }
@@ -699,9 +701,14 @@ var Game = function () {
 
       for (var id in this.missiles) {
         var missile = this.missiles[id];
+        var collidingShieldPart = this.collidingShieldPart(id);
         var idOfCollidingMissile = this.idOfCollidingMissile(id);
 
-        if (idOfCollidingMissile) {
+        if (collidingShieldPart) {
+          delete this.missiles[id];
+          collidingShieldPart.active = false;
+          this.updateBoard(missile, null);
+        } else if (idOfCollidingMissile) {
           var collidingMissile = this.missiles[idOfCollidingMissile];
           delete this.missiles[idOfCollidingMissile];
           delete this.missiles[id];
@@ -734,6 +741,22 @@ var Game = function () {
           return id;
         } else if (missile1.x === missile2.x - 1 && missile1.y === missile2.y) {
           return id;
+        }
+      }
+    }
+  }, {
+    key: "collidingShieldPart",
+    value: function collidingShieldPart(missileId) {
+      var missile = this.missiles[missileId];
+      var activeShieldParts = this.getShieldParts().filter(function (part) {
+        return part.active;
+      });
+
+      for (var i = 0; i < activeShieldParts.length; i++) {
+        var part = activeShieldParts[i];
+
+        if (missile.isEqual(part)) {
+          return part;
         }
       }
     }

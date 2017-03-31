@@ -180,7 +180,9 @@ class Game {
     const game = this;
     this.shields.forEach((shield) => {
       shield.parts.forEach((part) => {
-        game.updateBoard(part, "orange");
+        if (part.active === true) {
+          game.updateBoard(part, "orange");
+        }
       });
     });
   }
@@ -252,9 +254,14 @@ class Game {
 
     for (let id in this.missiles) {
       let missile = this.missiles[id];
+      let collidingShieldPart = this.collidingShieldPart(id);
       let idOfCollidingMissile = this.idOfCollidingMissile(id);
 
-      if (idOfCollidingMissile) {
+      if (collidingShieldPart) {
+        delete this.missiles[id];
+        collidingShieldPart.active = false;
+        this.updateBoard(missile, null);
+      } else if (idOfCollidingMissile) {
         let collidingMissile = this.missiles[idOfCollidingMissile];
         delete this.missiles[idOfCollidingMissile];
         delete this.missiles[id];
@@ -286,6 +293,21 @@ class Game {
         return id;
       } else if (missile1.x === missile2.x - 1 && missile1.y === missile2.y) {
         return id;
+      }
+    }
+  }
+
+  collidingShieldPart(missileId) {
+    const missile = this.missiles[missileId];
+    const activeShieldParts = this.getShieldParts().filter((part) => {
+      return part.active;
+    });
+
+    for (let i = 0; i < activeShieldParts.length; i++) {
+      let part = activeShieldParts[i];
+
+      if (missile.isEqual(part)) {
+        return part;
       }
     }
   }
