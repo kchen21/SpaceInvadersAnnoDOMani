@@ -829,9 +829,10 @@ var Shield = function () {
     value: function renderParts(boss) {
       this.parts.push(new Coord(boss[0], boss[1]));
       this.parts.push(new Coord(boss[0] + 1, boss[1] - 1));
-      this.parts.push(new Coord(boss[0] + 2, boss[1] - 2));
+      this.parts.push(new Coord(boss[0] + 1, boss[1]));
       this.parts.push(new Coord(boss[0] + 1, boss[1] + 1));
-      this.parts.push(new Coord(boss[0] + 2, boss[1] + 2));
+      this.parts.push(new Coord(boss[0] + 2, boss[1] - 1));
+      this.parts.push(new Coord(boss[0] + 2, boss[1] + 1));
     }
   }]);
 
