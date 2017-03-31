@@ -217,7 +217,15 @@ class Game {
 
     for (let id in this.missiles) {
       let missile = this.missiles[id];
-      if (missile.origin === "alien" && missile.includedIn(this.playerShip.body)) {
+      let idOfCollidingMissile = this.idOfCollidingMissile(id);
+
+      if (idOfCollidingMissile) {
+        let collidingMissile = this.missiles[idOfCollidingMissile];
+        delete this.missiles[idOfCollidingMissile];
+        delete this.missiles[id];
+        this.updateBoard(collidingMissile, null);
+        this.updateBoard(missile, null);
+      } else if (missile.origin === "alien" && missile.includedIn(this.playerShip.body)) {
         delete this.missiles[id];
         this.destroyShip(this.playerShip);
         this.resetPlayerShip();
@@ -230,6 +238,19 @@ class Game {
             break;
           }
         }
+      }
+    }
+  }
+
+  idOfCollidingMissile(missileId) {
+    const missile1 = this.missiles[missileId];
+    for (let id in this.missiles) {
+      let missile2 = this.missiles[id];
+
+      if (id !== missileId && missile1.isEqual(missile2)) {
+        return id;
+      } else if (missile1.x === missile2.x - 1 && missile1.y === missile2.y) {
+        return id;
       }
     }
   }

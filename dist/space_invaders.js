@@ -656,7 +656,15 @@ var Game = function () {
 
       for (var id in this.missiles) {
         var missile = this.missiles[id];
-        if (missile.origin === "alien" && missile.includedIn(this.playerShip.body)) {
+        var idOfCollidingMissile = this.idOfCollidingMissile(id);
+
+        if (idOfCollidingMissile) {
+          var collidingMissile = this.missiles[idOfCollidingMissile];
+          delete this.missiles[idOfCollidingMissile];
+          delete this.missiles[id];
+          this.updateBoard(collidingMissile, null);
+          this.updateBoard(missile, null);
+        } else if (missile.origin === "alien" && missile.includedIn(this.playerShip.body)) {
           delete this.missiles[id];
           this.destroyShip(this.playerShip);
           this.resetPlayerShip();
@@ -669,6 +677,20 @@ var Game = function () {
               break;
             }
           }
+        }
+      }
+    }
+  }, {
+    key: "idOfCollidingMissile",
+    value: function idOfCollidingMissile(missileId) {
+      var missile1 = this.missiles[missileId];
+      for (var id in this.missiles) {
+        var missile2 = this.missiles[id];
+
+        if (id !== missileId && missile1.isEqual(missile2)) {
+          return id;
+        } else if (missile1.x === missile2.x - 1 && missile1.y === missile2.y) {
+          return id;
         }
       }
     }
