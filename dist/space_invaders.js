@@ -435,10 +435,14 @@ var Game = function () {
           this.createMissile(this.playerShip.fireMissile());
           break;
         case 37:
-          this.playerShip.move("left");
+          if (this.playerShip.body[2].y !== 0) {
+            this.playerShip.move("left");
+          }
           break;
         case 39:
-          this.playerShip.move("right");
+          if (this.playerShip.body[3].y !== 26) {
+            this.playerShip.move("right");
+          }
           break;
       }
     }
