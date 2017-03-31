@@ -618,6 +618,19 @@ var Game = function () {
       });
     }
   }, {
+    key: "getShieldParts",
+    value: function getShieldParts() {
+      var flatten = function flatten(arr) {
+        return arr.reduce(function (acc, val) {
+          return acc.concat(Array.isArray(val) ? flatten(val) : val);
+        }, []);
+      };
+
+      return flatten(this.shields.map(function (shield) {
+        return shield.parts;
+      }));
+    }
+  }, {
     key: "createMissile",
     value: function createMissile(_ref) {
       var loc = _ref.loc,

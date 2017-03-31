@@ -185,6 +185,18 @@ class Game {
     });
   }
 
+  getShieldParts() {
+    const flatten = (arr) => {
+      return arr.reduce((acc, val) => {
+        return acc.concat(Array.isArray(val) ? flatten(val) : val);
+      }, []);
+    };
+
+    return flatten(this.shields.map((shield) => {
+      return shield.parts;
+    }));
+  }
+
   createMissile({loc, origin}) {
     this.missileId += 1;
     const missile = new Missile(loc[0], loc[1], this.missileId, origin);
