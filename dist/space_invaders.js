@@ -211,7 +211,7 @@ var SpaceInvadersView = function () {
     this.game = new Game();
     this.board = this.game.board;
     this.interval1 = setInterval(this.runDecisecondIntervalMethods.bind(this), 100);
-    this.interval2 = setInterval(this.game.generateAlienShipMissile.bind(this.game), 1000);
+    this.interval2 = setInterval(this.game.generateAlienShipMissile.bind(this.game), 500);
     this.interval3 = setInterval(this.game.moveAlienShipsDown.bind(this.game), 10000);
   }
 
@@ -267,7 +267,10 @@ var SpaceInvadersView = function () {
   }, {
     key: "checkGameStatus",
     value: function checkGameStatus() {
-      if (this.game.lives === 0) {
+      var lowestLiveAlienShip = this.game.lowestLiveAlienShip();
+      var xCoordOfLowestAlienShipPart = lowestLiveAlienShip ? lowestLiveAlienShip.nose[0] : null;
+
+      if (this.game.lives === 0 || xCoordOfLowestAlienShipPart === 29) {
         alert("GAME OVER");
         window.clearInterval(this.interval1);
         window.clearInterval(this.interval2);
@@ -542,6 +545,15 @@ var Game = function () {
       this.alienShips.forEach(function (ship) {
         ship.move("down");
       });
+    }
+  }, {
+    key: "lowestLiveAlienShip",
+    value: function lowestLiveAlienShip() {
+      var liveAlienShips = this.alienShips.filter(function (ship) {
+        return ship.isLive();
+      });
+
+      return liveAlienShips[0] || null;
     }
   }, {
     key: "destroyShip",

@@ -6,7 +6,7 @@ class SpaceInvadersView {
     this.game = new Game();
     this.board = this.game.board;
     this.interval1 = setInterval(this.runDecisecondIntervalMethods.bind(this), 100);
-    this.interval2 = setInterval(this.game.generateAlienShipMissile.bind(this.game), 1000);
+    this.interval2 = setInterval(this.game.generateAlienShipMissile.bind(this.game), 500);
     this.interval3 = setInterval(this.game.moveAlienShipsDown.bind(this.game), 10000);
   }
 
@@ -56,7 +56,10 @@ class SpaceInvadersView {
   }
 
   checkGameStatus() {
-    if (this.game.lives === 0) {
+    const lowestLiveAlienShip = this.game.lowestLiveAlienShip();
+    const xCoordOfLowestAlienShipPart = lowestLiveAlienShip ? lowestLiveAlienShip.nose[0] : null;
+
+    if (this.game.lives === 0 || xCoordOfLowestAlienShipPart === 29) {
       alert("GAME OVER");
       window.clearInterval(this.interval1);
       window.clearInterval(this.interval2);

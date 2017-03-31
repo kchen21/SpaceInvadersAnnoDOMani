@@ -123,6 +123,14 @@ class Game {
     });
   }
 
+  lowestLiveAlienShip() {
+    const liveAlienShips = this.alienShips.filter((ship) => {
+      return ship.isLive();
+    });
+
+    return liveAlienShips[0] || null;
+  }
+
   destroyShip(ship) {
     const game = this;
 
