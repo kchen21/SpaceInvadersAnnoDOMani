@@ -64,6 +64,11 @@ class SpaceInvadersView {
       window.clearInterval(this.interval1);
       window.clearInterval(this.interval2);
       window.clearInterval(this.interval3);
+    } else if (lowestLiveAlienShip === null) {
+      alert("YOU WIN");
+      window.clearInterval(this.interval1);
+      window.clearInterval(this.interval2);
+      window.clearInterval(this.interval3);
     }
   }
 }
