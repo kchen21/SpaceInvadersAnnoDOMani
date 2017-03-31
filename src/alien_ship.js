@@ -26,7 +26,7 @@ class AlienShip extends Ship {
   }
 
   isLive() {
-    this.color !== "black";
+    return this.color !== "black";
   }
 }
 

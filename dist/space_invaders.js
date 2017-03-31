@@ -334,7 +334,7 @@ var AlienShip = function (_Ship) {
   }, {
     key: "isLive",
     value: function isLive() {
-      this.color !== "black";
+      return this.color !== "black";
     }
   }]);
 
@@ -549,8 +549,8 @@ var Game = function () {
         // The ship will be hidden, but will continue to exist,
         // because, to determine the direction in which a row's ships will move,
         // we need the ships at each end.
-        this.alienShips[alienShipIndex].color = "black";
-        this.alienShips[alienShipIndex].shooting = false;
+        ship.color = "black";
+        ship.shooting = false;
         this.alienShips[alienShipIndex + 6].shooting = true;
         ship.body.forEach(function (part) {
           game.updateBoard(part, null);
@@ -658,7 +658,7 @@ var Game = function () {
             var ship = this.alienShips[i];
             if (missile.origin === "human" && ship.isLive() && missile.includedIn(ship.body)) {
               delete this.missiles[id];
-              game.destroyShip(this.ship);
+              game.destroyShip(ship);
               break;
             }
           }
