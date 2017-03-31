@@ -210,7 +210,7 @@ var SpaceInvadersView = function () {
     this.el = el;
     this.game = new Game();
     this.board = this.game.board;
-    this.interval1 = setInterval(this.runDecisecondIntervalMethods.bind(this), 500);
+    this.interval1 = setInterval(this.runDecisecondIntervalMethods.bind(this), 100);
     this.interval2 = setInterval(this.game.generateAlienShipMissile.bind(this.game), 5000);
     this.interval3 = setInterval(this.game.moveAlienShipsDown.bind(this.game), 10000);
   }
@@ -551,7 +551,8 @@ var Game = function () {
         // we need the ships at each end.
         ship.color = "black";
         ship.shooting = false;
-        if (this.alienShips[alienShipIndex + 6]) {
+        var potentialShooter = this.alienShips[alienShipIndex + 6];
+        if (potentialShooter && potentialShooter.color !== "black") {
           this.alienShips[alienShipIndex + 6].shooting = true;
         }
         ship.body.forEach(function (part) {

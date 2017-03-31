@@ -132,7 +132,8 @@ class Game {
       // we need the ships at each end.
       ship.color = "black";
       ship.shooting = false;
-      if (this.alienShips[alienShipIndex + 6]) {
+      const potentialShooter = this.alienShips[alienShipIndex + 6];
+      if (potentialShooter && potentialShooter.color !== "black") {
         this.alienShips[alienShipIndex + 6].shooting = true;
       }
       ship.body.forEach((part) => {
