@@ -6,7 +6,7 @@ class SpaceInvadersView {
     this.game = new Game();
     this.board = this.game.board;
     this.interval1 = setInterval(this.runDecisecondIntervalMethods.bind(this), 100);
-    this.interval2 = setInterval(this.game.generateAlienShipMissile.bind(this.game), 5000);
+    this.interval2 = setInterval(this.game.generateAlienShipMissile.bind(this.game), 1000);
     this.interval3 = setInterval(this.game.moveAlienShipsDown.bind(this.game), 10000);
   }
 
