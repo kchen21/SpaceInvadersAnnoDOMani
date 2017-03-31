@@ -813,7 +813,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Coord = __webpack_require__(0);
+var ShieldPart = __webpack_require__(10);
 
 var Shield = function () {
   function Shield(boss) {
@@ -827,12 +827,12 @@ var Shield = function () {
   _createClass(Shield, [{
     key: "renderParts",
     value: function renderParts(boss) {
-      this.parts.push(new Coord(boss[0], boss[1]));
-      this.parts.push(new Coord(boss[0] + 1, boss[1] - 1));
-      this.parts.push(new Coord(boss[0] + 1, boss[1]));
-      this.parts.push(new Coord(boss[0] + 1, boss[1] + 1));
-      this.parts.push(new Coord(boss[0] + 2, boss[1] - 1));
-      this.parts.push(new Coord(boss[0] + 2, boss[1] + 1));
+      this.parts.push(new ShieldPart(boss[0], boss[1]));
+      this.parts.push(new ShieldPart(boss[0] + 1, boss[1] - 1));
+      this.parts.push(new ShieldPart(boss[0] + 1, boss[1]));
+      this.parts.push(new ShieldPart(boss[0] + 1, boss[1] + 1));
+      this.parts.push(new ShieldPart(boss[0] + 2, boss[1] - 1));
+      this.parts.push(new ShieldPart(boss[0] + 2, boss[1] + 1));
     }
   }]);
 
@@ -840,6 +840,38 @@ var Shield = function () {
 }();
 
 module.exports = Shield;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Coord = __webpack_require__(0);
+
+var ShieldPart = function (_Coord) {
+  _inherits(ShieldPart, _Coord);
+
+  function ShieldPart(x, y) {
+    _classCallCheck(this, ShieldPart);
+
+    var _this = _possibleConstructorReturn(this, (ShieldPart.__proto__ || Object.getPrototypeOf(ShieldPart)).call(this, x, y));
+
+    _this.active = true;
+    return _this;
+  }
+
+  return ShieldPart;
+}(Coord);
+
+module.exports = ShieldPart;
 
 /***/ })
 /******/ ]);
