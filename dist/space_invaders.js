@@ -551,7 +551,9 @@ var Game = function () {
         // we need the ships at each end.
         ship.color = "black";
         ship.shooting = false;
-        this.alienShips[alienShipIndex + 6].shooting = true;
+        if (this.alienShips[alienShipIndex + 6]) {
+          this.alienShips[alienShipIndex + 6].shooting = true;
+        }
         ship.body.forEach(function (part) {
           game.updateBoard(part, null);
         });
