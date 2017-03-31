@@ -640,7 +640,9 @@ var Game = function () {
       });
       var randomShootingShip = shootingShips[Math.floor(Math.random() * shootingShips.length)];
 
-      this.createMissile(randomShootingShip.fireMissile());
+      if (randomShootingShip) {
+        this.createMissile(randomShootingShip.fireMissile());
+      }
     }
   }, {
     key: "mapAlienShipsToTheirBodies",

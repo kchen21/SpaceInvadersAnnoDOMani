@@ -205,7 +205,9 @@ class Game {
     const shootingShips = this.alienShips.filter((ship) => { return ship.shooting });
     const randomShootingShip = shootingShips[Math.floor(Math.random() * shootingShips.length)];
 
-    this.createMissile(randomShootingShip.fireMissile());
+    if (randomShootingShip) {
+      this.createMissile(randomShootingShip.fireMissile());
+    }
   }
 
   mapAlienShipsToTheirBodies() {
