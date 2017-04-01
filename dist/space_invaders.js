@@ -472,7 +472,7 @@ var Game = function () {
     this.renderAlienShips();
     this.renderShields();
     this.resetPlayerShip();
-    window.addEventListener("keydown", this.handleKeyEvent.bind(this));
+    window.addEventListener("keyup", this.handleKeyEvent.bind(this));
   }
 
   _createClass(Game, [{

@@ -16,7 +16,7 @@ class Game {
     this.renderAlienShips();
     this.renderShields();
     this.resetPlayerShip();
-    window.addEventListener("keydown", this.handleKeyEvent.bind(this));
+    window.addEventListener("keyup", this.handleKeyEvent.bind(this));
   }
 
   handleKeyEvent(event) {
