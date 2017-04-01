@@ -136,7 +136,6 @@ class Game {
 
     if (ship instanceof PlayerShip) {
       this.lives -= 1;
-      this.playerShip = null;
       ship.body.forEach((part) => {
         game.updateBoard(part, null);
       });

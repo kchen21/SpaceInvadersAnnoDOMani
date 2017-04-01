@@ -300,15 +300,15 @@ var SpaceInvadersView = function () {
       var xCoordOfLowestAlienShipPart = lowestLiveAlienShip ? lowestLiveAlienShip.nose[0] : null;
 
       if (this.game.lives === 0 || xCoordOfLowestAlienShipPart === 29) {
+        window.clearInterval(this.interval1);
+        window.clearInterval(this.interval2);
+        window.clearInterval(this.interval3);
         alert("GAME OVER");
-        window.clearInterval(this.interval1);
-        window.clearInterval(this.interval2);
-        window.clearInterval(this.interval3);
       } else if (lowestLiveAlienShip === null) {
-        alert("YOU WIN");
         window.clearInterval(this.interval1);
         window.clearInterval(this.interval2);
         window.clearInterval(this.interval3);
+        alert("YOU WIN");
       }
     }
   }]);
@@ -596,7 +596,6 @@ var Game = function () {
 
       if (ship instanceof PlayerShip) {
         this.lives -= 1;
-        this.playerShip = null;
         ship.body.forEach(function (part) {
           game.updateBoard(part, null);
         });
