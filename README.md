@@ -4,5 +4,8 @@
 
 [gh-pages]: https://kchen21.github.io/SpaceInvadersAnnoDOMani/
 
-Space Invaders Anno DOMani is a fast-paced Space Invaders JavaScript browser game. It utilizes [DOMani][domani-url], a DOM manipulation library I built, to render DOM objects and alter them.
+Space Invaders Anno DOMani is a fast-paced Space Invaders JavaScript browser game. It utilizes DOMani, a DOM manipulation library I built, to render DOM objects and alter them.
+
+[DOMani][domani-url]
+
 [domani-url]: https://github.com/kchen21/DOMani
