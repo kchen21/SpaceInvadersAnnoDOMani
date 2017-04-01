@@ -3,12 +3,12 @@ const Game = require("./game.js");
 class SpaceInvadersView {
   constructor(el) {
     this.el = el;
-    this.game = new Game();
-    this.board = this.game.board;
     this.showInstructions();
   }
 
   showInstructions() {
+    this.game = new Game();
+    this.board = this.game.board;
     this.el.empty();
     const $heading = $l("<h2>How To Play</h2>");
     $heading.addClass("instructions-heading");
@@ -26,10 +26,10 @@ class SpaceInvadersView {
     $startButton.addClass("start-button");
     $startButton.html('<input type="submit" value="Start">');
     this.el.append($startButton);
-    $l('.start-button').on("submit", view.run.bind(view));
+    $l('.start-button').on("submit", view.initializeIntervals.bind(view));
   }
 
-  run(evt) {
+  initializeIntervals(evt) {
     evt.preventDefault();
     this.interval1 = setInterval(this.runDecisecondIntervalMethods.bind(this), 100);
     this.interval2 = setInterval(this.game.generateAlienShipMissile.bind(this.game), 500);
@@ -69,12 +69,12 @@ class SpaceInvadersView {
   }
 
   runDecisecondIntervalMethods() {
-    this.checkGameStatus();
     this.game.markAlienShipsOnBoard();
     this.game.markShieldsOnBoard();
     this.game.markPlayerShipOnBoard();
     this.game.markMissilesOnBoard();
     this.renderBoard();
+    this.checkGameStatus();
     this.game.clearAlienShipsFromBoard();
     this.game.clearPlayerShipFromBoard();
     this.game.moveAlienShipsLR();
@@ -86,16 +86,22 @@ class SpaceInvadersView {
     const lowestLiveAlienShip = this.game.lowestLiveAlienShip();
     const xCoordOfLowestAlienShipPart = lowestLiveAlienShip ? lowestLiveAlienShip.nose[0] : null;
 
-    if (this.game.lives === 0 || xCoordOfLowestAlienShipPart === 29) {
+    if (this.game.lives <= 0 || xCoordOfLowestAlienShipPart === 29) {
       window.clearInterval(this.interval1);
       window.clearInterval(this.interval2);
       window.clearInterval(this.interval3);
-      alert("GAME OVER");
+
+      if (confirm("YOU LOSE! START A NEW GAME?")) {
+        this.showInstructions();
+      }
     } else if (lowestLiveAlienShip === null) {
       window.clearInterval(this.interval1);
       window.clearInterval(this.interval2);
       window.clearInterval(this.interval3);
-      alert("YOU WIN");
+
+      if (confirm("YOU WIN! START A NEW GAME?")) {
+        this.showInstructions();
+      }
     }
   }
 }
