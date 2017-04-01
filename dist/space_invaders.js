@@ -231,7 +231,7 @@ var SpaceInvadersView = function () {
 
       var $startButton = $l("<form></form>");
       $startButton.addClass("start-button");
-      $startButton.html('<input type="submit" value="Start">');
+      $startButton.html('<input type="submit" value="START">');
       this.el.append($startButton);
       $l('.start-button').on("submit", view.initializeIntervals.bind(view));
     }
