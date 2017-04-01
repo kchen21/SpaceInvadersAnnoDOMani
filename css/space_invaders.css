@@ -1,14 +1,18 @@
 body {
   text-align: center;
-  font-family: sans-serif;
+  font-family: 'Graduate', cursive;
   font-size: 36px;
+  color: #fff;
+  background-image: url("../assets/images/background.jpg");
 }
 
 figure {
   width: 459px;
-  height: 612px;
+  height: 636px;
   margin: 0 auto;
-  border: 3px solid black;
+  border: 3px solid #fff;
+  border-radius: 4px;
+  background: #000;
 }
 
 li {
@@ -21,6 +25,11 @@ li {
 
 h1 {
   margin: 20px 0px;
+}
+
+p {
+  font-size: 16px;
+  padding: 4px 0;
 }
 
 .white-alien-ship-part {

@@ -210,17 +210,46 @@ var SpaceInvadersView = function () {
     this.el = el;
     this.game = new Game();
     this.board = this.game.board;
-    this.interval1 = setInterval(this.runDecisecondIntervalMethods.bind(this), 100);
-    this.interval2 = setInterval(this.game.generateAlienShipMissile.bind(this.game), 500);
-    this.interval3 = setInterval(this.game.moveAlienShipsDown.bind(this.game), 10000);
+    this.showInstructions();
   }
 
   _createClass(SpaceInvadersView, [{
+    key: "showInstructions",
+    value: function showInstructions() {
+      this.el.empty();
+      var $heading = $l("<h2>How To Play</h2>");
+      $heading.addClass("instructions-heading");
+      var $info1 = $l("<p>Tap the left and right arrow keys to manuever</p>");
+      var $info2 = $l("<p>Tap the space bar to shoot</p>");
+      $info1.addClass("instructions-info");
+      $info2.addClass("instructions-info");
+      this.el.append($heading);
+      this.el.append($info1);
+      this.el.append($info2);
+
+      var view = this;
+
+      var $startButton = $l("<form></form>");
+      $startButton.addClass("start-button");
+      $startButton.html('<input type="submit" value="Start">');
+      this.el.append($startButton);
+      $l('.start-button').on("submit", view.run.bind(view));
+    }
+  }, {
+    key: "run",
+    value: function run(evt) {
+      evt.preventDefault();
+      this.interval1 = setInterval(this.runDecisecondIntervalMethods.bind(this), 100);
+      this.interval2 = setInterval(this.game.generateAlienShipMissile.bind(this.game), 500);
+      this.interval3 = setInterval(this.game.moveAlienShipsDown.bind(this.game), 10000);
+    }
+  }, {
     key: "renderBoard",
     value: function renderBoard() {
       var _this = this;
 
       this.el.empty();
+      this.el.append("<p>Lives: " + this.game.lives + "</p>");
       this.board.grid.forEach(function (row, i) {
         var $ul = $l("<ul></ul>");
         $ul.addClass("group");
