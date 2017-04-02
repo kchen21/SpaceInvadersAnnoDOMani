@@ -15,15 +15,15 @@ figure {
   background: #000;
 }
 
-.instructions-heading {
+.view-h2 {
   margin-top: 56%;
 }
 
-.start-button > input {
+.start-button > input, .reset-button > input {
   font-size: 16px;
 }
 
-.start-button > input:hover {
+.start-button > input:hover, .reset-button > input:hover {
   cursor: pointer;
   opacity: .80;
 }

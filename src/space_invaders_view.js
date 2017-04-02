@@ -11,22 +11,18 @@ class SpaceInvadersView {
     this.board = this.game.board;
     this.el.empty();
     const $heading = $l("<h2>How To Play</h2>");
-    $heading.addClass("instructions-heading");
+    $heading.addClass("view-h2");
     const $info1 = $l("<p>Tap the left and right arrow keys to manuever</p>");
     const $info2 = $l("<p>Tap the space bar to shoot</p>");
-    $info1.addClass("instructions-info");
-    $info2.addClass("instructions-info");
     this.el.append($heading);
     this.el.append($info1);
     this.el.append($info2);
 
-    const view = this;
-
-    const $startButton = $l(`<form></form>`);
+    const $startButton = $l("<form></form>");
     $startButton.addClass("start-button");
     $startButton.html('<input type="submit" value="START">');
     this.el.append($startButton);
-    $l('.start-button').on("submit", view.initializeIntervals.bind(view));
+    $l('.start-button').on("submit", this.initializeIntervals.bind(this));
   }
 
   initializeIntervals(evt) {
@@ -90,19 +86,39 @@ class SpaceInvadersView {
       window.clearInterval(this.interval1);
       window.clearInterval(this.interval2);
       window.clearInterval(this.interval3);
-
-      if (confirm("YOU LOSE! START A NEW GAME?")) {
-        this.showInstructions();
-      }
+      this.showLoseMessage();
     } else if (lowestLiveAlienShip === null) {
       window.clearInterval(this.interval1);
       window.clearInterval(this.interval2);
       window.clearInterval(this.interval3);
-
-      if (confirm("YOU WIN! START A NEW GAME?")) {
-        this.showInstructions();
-      }
+      this.showWinMessage();
     }
+  }
+
+  showLoseMessage() {
+    this.el.empty();
+    const $heading = $l("<h2>You Lose</h2>");
+    $heading.addClass("view-h2");
+    this.el.append($heading);
+
+    this.renderResetButton();
+  }
+
+  showWinMessage() {
+    this.el.empty();
+    const $heading = $l("<h2>You Win</h2>");
+    $heading.addClass("view-h2");
+    this.el.append($heading);
+
+    this.renderResetButton();
+  }
+
+  renderResetButton() {
+    const $resetButton = $l("<form></form>");
+    $resetButton.addClass("reset-button");
+    $resetButton.html('<input type="submit" value="RESET">');
+    this.el.append($resetButton);
+    $l('.reset-button').on("submit", this.showInstructions.bind(this));
   }
 }
 

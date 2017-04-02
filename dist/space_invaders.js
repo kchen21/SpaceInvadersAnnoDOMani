@@ -218,22 +218,18 @@ var SpaceInvadersView = function () {
       this.board = this.game.board;
       this.el.empty();
       var $heading = $l("<h2>How To Play</h2>");
-      $heading.addClass("instructions-heading");
+      $heading.addClass("view-h2");
       var $info1 = $l("<p>Tap the left and right arrow keys to manuever</p>");
       var $info2 = $l("<p>Tap the space bar to shoot</p>");
-      $info1.addClass("instructions-info");
-      $info2.addClass("instructions-info");
       this.el.append($heading);
       this.el.append($info1);
       this.el.append($info2);
-
-      var view = this;
 
       var $startButton = $l("<form></form>");
       $startButton.addClass("start-button");
       $startButton.html('<input type="submit" value="START">');
       this.el.append($startButton);
-      $l('.start-button').on("submit", view.initializeIntervals.bind(view));
+      $l('.start-button').on("submit", this.initializeIntervals.bind(this));
     }
   }, {
     key: "initializeIntervals",
@@ -303,19 +299,42 @@ var SpaceInvadersView = function () {
         window.clearInterval(this.interval1);
         window.clearInterval(this.interval2);
         window.clearInterval(this.interval3);
-
-        if (confirm("YOU LOSE! START A NEW GAME?")) {
-          this.showInstructions();
-        }
+        this.showLoseMessage();
       } else if (lowestLiveAlienShip === null) {
         window.clearInterval(this.interval1);
         window.clearInterval(this.interval2);
         window.clearInterval(this.interval3);
-
-        if (confirm("YOU WIN! START A NEW GAME?")) {
-          this.showInstructions();
-        }
+        this.showWinMessage();
       }
+    }
+  }, {
+    key: "showLoseMessage",
+    value: function showLoseMessage() {
+      this.el.empty();
+      var $heading = $l("<h2>You Lose</h2>");
+      $heading.addClass("view-h2");
+      this.el.append($heading);
+
+      this.renderResetButton();
+    }
+  }, {
+    key: "showWinMessage",
+    value: function showWinMessage() {
+      this.el.empty();
+      var $heading = $l("<h2>You Win</h2>");
+      $heading.addClass("view-h2");
+      this.el.append($heading);
+
+      this.renderResetButton();
+    }
+  }, {
+    key: "renderResetButton",
+    value: function renderResetButton() {
+      var $resetButton = $l("<form></form>");
+      $resetButton.addClass("reset-button");
+      $resetButton.html('<input type="submit" value="RESET">');
+      this.el.append($resetButton);
+      $l('.reset-button').on("submit", this.showInstructions.bind(this));
     }
   }]);
 
